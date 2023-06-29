@@ -1,0 +1,39 @@
+.card {
+    display: grid;
+    place-items: center;
+    background: var(--body-gradient);
+    padding-block: 4.5rem;
+  }
+  .card__container {
+    margin-inline: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+  .card__article {
+    position: relative;
+    background-color: var(--container-color);
+    padding: 2.5rem;
+    border-radius: 2rem;
+    text-align: center;
+    box-shadow: 0 20px 24px hsla(235, 32%, 15%, 0.2);
+    overflow: hidden;
+  }
+  .card__img {
+    width: 250px;
+    margin-bottom: 1rem;
+    animation: float-img 2.5s ease-in-out infinite;
+  }
+  .card__title {
+    color: var(--title-color);
+    font-size: var(--biggest-font-size);
+    line-height: 100%;
+    margin-bottom: 1rem;
+  }
+  .card__description {
+    font-size: var(--normal-font-size);
+  }
+  .card__data {
+    position: relative;
+    z-index: 10;
+  }
