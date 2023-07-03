@@ -3,16 +3,12 @@ import "./MainPage.css";
 
 import { Application } from '@splinetool/runtime';
 
-
 function MainPage() {
-
 
     return (
         <div className="main-page">
-
-            <div className="main">
                 <section className="home">
-                    <div className="home__container container">
+                    <div className="home__container">
                         <div className="home__data">
                             <span className="home__subtitle">My Links</span>
                             <h1 className="home__title">Hey Buddy</h1>
@@ -37,7 +33,6 @@ function MainPage() {
                     </footer>
                 </section>
             </div>
-        </div>
     );
 }
 
