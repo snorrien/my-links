@@ -1,6 +1,7 @@
 import "./MainPage.css";
 import Auth from "../Auth/Auth";
 import { useState } from "react";
+import Modal from "../Modal/Modal";
 
 function MainPage() {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,6 @@ function MainPage() {
                         <a href="#" className="home__button" onClick={() => setIsOpen(true)}>
                             Continue
                         </a>
-                        {isOpen && <Auth setIsOpen={setIsOpen} />}
                     </div>
 
                     <div className="home__img">
@@ -31,6 +31,10 @@ function MainPage() {
                     <span>info@company.com</span>
                 </footer>
             </section>
+            
+            <Modal title="Login" isOpen={isOpen} onClose={() => setIsOpen(false)}>
+                <Auth />
+            </Modal>
         </div>
     );
 }

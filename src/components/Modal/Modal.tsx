@@ -1,22 +1,22 @@
+import "./Modal.css";
+
 type Props = {
     isOpen: boolean;
-    children: any;
     onClose: any;
     title: string;
+    children: any;
 }
 
-const Modal: React.FC<Props> = ({ isOpen, children, onClose, title }) => {
+const Modal: React.FC<Props> = ({ isOpen, onClose, title, children }) => {
     if (!isOpen) {
         return null;
     }
 
     return (
-        <div className="modal-outer" onClick={onClose}>
-            <div className="auth" onClick={e => e.stopPropagation()}>
-                <h1 className="login__title">title</h1>
-                <div>
-                    {children}
-                </div>
+        <div className="modal" onClick={onClose}>
+            <div className="modal__content" onClick={e => e.stopPropagation()}>
+                <h1 className="modal__title">{title}</h1>
+                {children}
             </div>
         </div>
     );
