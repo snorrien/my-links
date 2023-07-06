@@ -2,31 +2,58 @@ import "./Card.css";
 
 function Card() {
     return (
-        <div className="card">
-            <div className="card__container">
-                <article className="card__article">
-                    <div className="card__data">
-                        <img src="assets/img/img1.png" alt="card image" className="card__img" />
-                        <h1 className="card__title">Shield & Shining Star</h1>
-                        <p className="card__description">Beautiful card, with hover effects</p>
+        <div className="card__page">
+            <div className="product-grid">
+                <div className="card stacked featured">
+                    <img src="./imgs/dog.jpg" className="card__img" />
+                    <div className="card__content">
+                        <h2 className="card__title">Title</h2>
+                        <p className="card__description">Smth long, very long, really long</p>
                     </div>
-                </article>
-                <article className="card__article">
-                    <div className="card__data">
-                        <img src="assets/img/img1.png" alt="card image" className="card__img" />
-                        <h1 className="card__title">Shield & Shining Star</h1>
-                        <p className="card__description">Beautiful card, with hover effects</p>
+                </div>
+                <div className="card stacked featured">
+                    <img src="./imgs/dog.jpg" className="card__img" />
+                    <div className="card__content">
+                        <h2 className="card__title">Title</h2>
+                        <p className="card__description">Smth long, very long, really long</p>
                     </div>
-                </article>
-                <article className="card__article">
-                    <div className="card__data">
-                        <img src="assets/img/img1.png" alt="card image" className="card__img" />
-                        <h1 className="card__title">Shield & Shining Star</h1>
-                        <p className="card__description">Beautiful card, with hover effects</p>
+                </div>
+                <div className="card stacked featured">
+                    <img src="./imgs/dog.jpg" className="card__img" />
+                    <div className="card__content">
+                        <h2 className="card__title">Title</h2>
+                        <p className="card__description">Smth long, very long, really long</p>
                     </div>
-                </article>
+                </div>
+                <div className="card stacked featured">
+                    <img src="./imgs/dog.jpg" className="card__img" />
+                    <div className="card__content">
+                        <h2 className="card__title">Title</h2>
+                        <p className="card__description">Smth long, very long, really long</p>
+                    </div>
+                </div>
+                <div className="card stacked featured">
+                    <img src="./imgs/dog.jpg" className="card__img" />
+                    <div className="card__content">
+                        <h2 className="card__title">Title</h2>
+                        <p className="card__description">Smth long, very long, really long</p>
+                    </div>
+                </div>
+                <div className="card stacked featured">
+                    <img src="./imgs/dog.jpg" className="card__img" />
+                    <div className="card__content">
+                        <h2 className="card__title">Title</h2>
+                        <p className="card__description">Smth long, very long, really long</p>
+                    </div>
+                </div>
+                <div className="card stacked featured">
+                    <img src="./imgs/dog.jpg" className="card__img" />
+                    <div className="card__content">
+                        <h2 className="card__title">Title</h2>
+                        <p className="card__description">Smth long, very long, really long</p>
+                    </div>
+                </div>
             </div>
-
         </div>
     );
 }
