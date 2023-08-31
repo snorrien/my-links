@@ -1,10 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './components/MainPage/MainPage';
-import Card from './components/Card/Card';
+import CardPage from './components/Card/CardPage';
 import Navbar from './components/Navbar/Navbar';
-
-
 
 function App() {
   return (
@@ -13,7 +11,7 @@ function App() {
         <Navbar />
         <Routes >
           <Route path='/' element={<MainPage />} />
-          <Route path='/card' element={<Card />} />
+          <Route path='/card' element={<CardPage />} />
         </Routes>
       </BrowserRouter>
     </div>
