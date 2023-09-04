@@ -4,9 +4,12 @@ import { db } from "../firebase";
 export async function addLink() {
     await addDoc(collection(db, "cards"), {
       id: generateFirebaseId(10),
-      title: "New link",
+      title: 'New title',
+      description: "https://bla.bla.bla..."
     });
 }
+
+
 
 function generateFirebaseId(length: number): string {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

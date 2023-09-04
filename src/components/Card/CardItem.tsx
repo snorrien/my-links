@@ -1,8 +1,13 @@
-import { useState, useRef, useEffect, DragEvent } from "react";
+import { useState, useRef, useEffect, DragEvent, MouseEventHandler } from "react";
 import { CardModel } from "../Models/CardModel";
-import Button from '@mui/material/Button';
 import { deleteLink } from "../Firebase/Link/deleteLink";
 import "./CardItem.css";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Input } from "@mui/material";
 
 type Props = {
     card: CardModel;
@@ -39,7 +44,12 @@ function CardItem({ card, fetchCards }: Props) {
     }, []);
 
     const handleDeleteClick = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        event.preventDefault();
+        await deleteLink(card.id);
+        await fetchCards();
+        setIsisMenuVisible(false);
+    }
+    
+    const handleEditClick = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         await deleteLink(card.id);
         await fetchCards();
         setIsisMenuVisible(false);
@@ -50,14 +60,20 @@ function CardItem({ card, fetchCards }: Props) {
         event.dataTransfer.setData("text/plain", JSON.stringify(card));
     };
 
-
     return (
         <div className="card">
-            <div className="card__body ">
-                <img src="./imgs/dog.jpg" className="card__img" />
-                <div className="card__content">
+            <Card sx={{
+                maxWidth: 345,
+                borderRadius: 5,
+            }}>
+                <CardMedia
+                    sx={{ height: 140 }}
+                    image="./imgs/dog.jpg"
+                />
+                <CardContent>
                     <div className="card__title">
-                        <h2 >Title</h2>
+                    <Input defaultValue={card.title} />
+
                         <div className="edit"
                             onMouseEnter={showBtnCorrection}
                             onMouseLeave={hideBtnCorrection}
@@ -65,34 +81,43 @@ function CardItem({ card, fetchCards }: Props) {
                             draggable={true}
                             onDragStart={handleDragEvent}
                             key={card.id}>
-                            <button
-                             className={`btnCorrection ${isButtonVisible ? 'show' : ''}`}
-                             onClick={clickBtnCorrection}>
+                            <div
+                                className={`btnCorrection ${isButtonVisible ? 'show' : ''}`}
+                                onClick={clickBtnCorrection}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 18.89H6.41421L15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89ZM21 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L9.24264 18.89H21V20.89ZM15.7279 6.74786L17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786Z" fill="rgba(182,176,176,1)"></path>
                                 </svg>
-                            </button>
+                            </div>
                             {isMenuVisible &&
-                            <ul className="btnCorrectionMenu">
+                            <ul className="btn-correction">
                                 <li>
-                                    <img className="dotsImg" src="/imgs/trash.png" />
-                                    <a href="#"
-                                        onClick={(event) => handleDeleteClick(event)}>Delete</a>
+                                <i className="ri-delete-bin-line"></i>
+                                    <a className="btn-correction__action" onClick={handleDeleteClick}>Delete</a>
                                 </li>
                                 <li>
-                                    <img className="dotsImg" src="/imgs/flag.png" />
-                                    <a href="#">Add importance</a>
+                                <i className ="ri-pencil-line"></i>
+                                    <a className="btn-correction__action" onClick={handleEditClick}>Correct</a>
+                                </li>
+                                <li>
+                                <i className="ri-sticky-note-line"></i>
+                                    <a className="btn-correction__action">Save to</a>
                                 </li>
                             </ul>}
                         </div>
-
-                       
+                        
                     </div>
 
+                    <Typography variant="body2" color="text.secondary">
+                    {card.description}
+                    </Typography>
+                </CardContent>
+                <CardActions>
 
-                </div>
-                <p className="card__description">   {card.title}</p>
-            </div>
-            <Button variant="contained">Hello world</Button>
+
+
+                </CardActions>
+
+            </Card>
+
         </div>
     );
 }

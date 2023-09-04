@@ -1,7 +1,8 @@
 /*=============CARDS=============*/
 
 .card {
-  margin: 1rem;
+  margin: 0;
+  position: relative;
 }
 
 .card__body {
@@ -10,7 +11,7 @@
   background: white;
   border-radius: 30px;
   transition: 0.2s ease-in-out;
-  position: relative;
+
 }
 
 .card__body:hover {
@@ -40,18 +41,12 @@
   width: 20px;
 }
 
-.icon-box:hover,
-.icon-edit:hover {
-  transform: scale(1.1) rotate(10deg);
-}
+
 
 .edit:hover {
   background-color: rgb(199, 199, 199);
 }
 
-.icon-box:hover path {
-  fill: #ae399c;
-}
 
 .edit:hover path {
   fill: white;
@@ -69,6 +64,54 @@
   border-radius: 10px;
   transition: 0.3s ease-in-out;
 }
+
+.btn-correction{
+  position: absolute;
+  z-index: 100;
+  left:100%;
+  top:40%;
+  width: 120px;
+  background-color: #0D1117;
+  border-radius: 5px
+}
+
+.btn-correction li{
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  color: white;
+  display: flex;
+  position: relative;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 4px; 
+}
+
+
+.btn-correction li:not(:active):hover,
+.btn-correction li:focus {
+  background-color: #21262C;
+}
+
+.btn-correction li:focus,
+.btn-correction li:active {
+  background-color: #1A1F24;
+  outline: none;
+}
+
+.btn-correction li:focus::before,
+.btn-correction li:active::before {
+  opacity: 1;
+}
+
+.btn-correction:hover > :not(.btn-correction li:hover) {
+  transition: 300ms;
+  filter: blur(1px);
+  transform: scale(0.95,0.95);
+}
+
+
+
 
 .card__img {
   width: 100%;
@@ -124,4 +167,9 @@ p.max-content {
 
 p.min-content {
   width: min-content;
+}
+
+.btnCorrectionMenu {
+  position: absolute;
+  z-index: 100;
 }

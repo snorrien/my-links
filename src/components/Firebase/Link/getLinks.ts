@@ -10,6 +10,7 @@ export async function getLinks(): Promise<CardModel[]> {
         cards.push({
             id: doc.id,
             title: doc.data().title,
+            description: doc.data().description
         });
     });
     console.log(cards)
