@@ -10,11 +10,15 @@ import { useState, useEffect } from 'react';
 import { CardModel } from '../Models/CardModel';
 import { addLink } from '../Firebase/Link/addLink';
 import { getLinks } from '../Firebase/Link/getLinks';
-import { red } from '@mui/material/colors';
+import CardFormModal from './CardForm/CardFormModal';
+import ConfirmationDialog from '../Library/ConfirmationDialog/ConfirmationDialog';
 
 
 function CardPage() {
     const [filter, setFilter] = React.useState('');
+    const [selectedCard, setSelectedCard] = useState<CardModel>();
+    const [isCardModalOpen, setIsCardModalOpen] = useState(false);
+    const [confirmationDialog, setConfirmationDialog] = useState(false);
 
     const handleChange = (event: SelectChangeEvent) => {
         setFilter(event.target.value);
@@ -34,9 +38,25 @@ function CardPage() {
         event.preventDefault();
         await addLink();
         await fetchCards();
+    };
+
+    const closeModal = () => {
+        setIsCardModalOpen(false);
+    };
+
+    const editCard = (card: CardModel) => {
+        setSelectedCard(card);
+        setIsCardModalOpen(true);
     }
 
+    const deleteCard = (card: CardModel) => {
+        setSelectedCard(card);
+        setConfirmationDialog(true);
+    }
 
+    const closeConfirmationDialog = () => {
+        setConfirmationDialog(false)
+    }
 
 
     return (
@@ -68,10 +88,22 @@ function CardPage() {
             <div className="cards-grid">
                 {cards.map((card) => (
                     <div key={card.id}>
-                        <CardItem card={card} fetchCards={fetchCards} />
+                        <CardItem card={card} editCard={editCard} deleteCard={deleteCard} />
                     </div>
                 ))}
             </div>
+            {selectedCard &&
+                <CardFormModal
+                    card={selectedCard}
+                    isOpen={isCardModalOpen}
+                    closeModal={closeModal}
+                    fetchCards={fetchCards}
+                />
+            }
+            <ConfirmationDialog
+                isOpen={confirmationDialog}
+                closeModal={closeConfirmationDialog}
+            />
         </div>
     )
 }
