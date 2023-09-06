@@ -13,7 +13,7 @@ export async function getLinks(): Promise<CardModel[]> {
             description: doc.data().description
         });
     });
-    console.log(cards)
+    
     return cards;
 }
 

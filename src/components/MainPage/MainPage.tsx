@@ -1,7 +1,7 @@
 import "./MainPage.css";
 import Auth from "../Auth/Auth";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
+import Modal from "../Library/Modal/Modal";
 
 function MainPage() {
     const [isOpen, setIsOpen] = useState(false);
