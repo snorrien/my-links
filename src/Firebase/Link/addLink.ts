@@ -5,11 +5,10 @@ export async function addLink() {
     await addDoc(collection(db, "cards"), {
       id: generateFirebaseId(10),
       title: 'New title',
-      description: "https://bla.bla.bla..."
+      description: "https://bla.bla.bla...",
+      createDate: new Date()
     });
 }
-
-
 
 function generateFirebaseId(length: number): string {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -1,0 +1,12 @@
+.register_btn {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; 
+  padding-top: 1.5rem;
+}
+
+
+.register_btn button {
+    width: 100%;
+}

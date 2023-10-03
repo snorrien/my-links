@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
-import { CardModel } from "../../Models/CardModel";
+import { CardModel } from "../../../Models/CardModel";
 import "./CardFormModal.css";
-import Modal from "../../Library/Modal/Modal";
-import { updateCard } from "../../Firebase/Link/updateCard";
+import { updateCard } from "../../../Firebase/Link/updateCard";
+import Modal from "../../Shared/Modal/Modal";
 
 type Props = {
     card: CardModel;

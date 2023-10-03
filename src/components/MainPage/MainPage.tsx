@@ -1,10 +1,26 @@
 import "./MainPage.css";
-import Auth from "../Auth/Auth";
 import { useState } from "react";
-import Modal from "../Library/Modal/Modal";
+import Modal from "../Shared/Modal/Modal";
+import LogIn from "../Shared/LogIn/LogIn";
+import Register from "../Shared/Register/Register";
+import Button from "../Shared/Button/Button";
+import { ModalState } from "./ModalState";
 
-function MainPage() {
+const MainPage: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [modalState, setModalState] = useState<ModalState>(ModalState.Login);
+
+    function getModalTitle() {
+        switch (modalState) {
+            case ModalState.Login:
+                return 'Login';
+            case ModalState.Register:
+                return 'Register';
+            case ModalState.ConfirmRegister:
+                return 'Regestration Completed!';
+        }
+    }
+
     return (
         <div className="main-page">
             <section className="home">
@@ -31,9 +47,33 @@ function MainPage() {
                     <span>info@company.com</span>
                 </footer>
             </section>
-            
-            <Modal title="Login" isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <Auth />
+
+            <Modal title={getModalTitle()} isOpen={isOpen} onClose={() => setIsOpen(false)}>
+                {modalState === ModalState.Login && (
+                    <div>
+                        <LogIn />
+                        <p className="login__toggle">
+                            Don't have an account?
+                            <a className="toggle_link" href="#" onClick={() => setModalState(ModalState.Register)}>Register</a>
+                        </p>
+                    </div>
+                )}
+                {modalState === ModalState.Register && (
+                    <div>
+                        <Register backToLogin={() => setModalState(ModalState.ConfirmRegister)} />
+                        <p className="login__toggle">
+                            Already have an account?
+                            <a className="toggle_link" href="#" onClick={() => setModalState(ModalState.Login)}>LogIn</a>
+                        </p>
+                    </div>
+                )}
+                {modalState === ModalState.ConfirmRegister && (
+                    <div>
+                        <div>You are registred</div>
+                        <Button text='Back to Login' onClick={() => setModalState(ModalState.Login)} />
+                    </div>
+                )}
+
             </Modal>
         </div>
     );

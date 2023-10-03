@@ -1,0 +1,11 @@
+.login__bottom{
+gap: 1.5rem;
+display: flex;
+flex-direction:column;
+padding-top: 1.5rem;
+}
+
+.login__info{
+display: flex;
+justify-content: space-between;
+}

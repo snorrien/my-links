@@ -1,38 +1,32 @@
-import * as React from 'react';
 import "./CardPage.css";
-import CardItem from "./CardItem";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Button, TextField } from '@mui/material';
-import { useState, useEffect } from 'react';
-import { CardModel } from '../Models/CardModel';
-import { addLink } from '../Firebase/Link/addLink';
-import { getLinks } from '../Firebase/Link/getLinks';
+import CardItem from "./CardItem/CardItem";
+import { Button } from '@mui/material';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { CardModel } from '../../Models/CardModel';
+import { addLink } from '../../Firebase/Link/addLink';
+import { getLinks } from '../../Firebase/Link/getLinks';
+import ConfirmationDialog from '../Shared/ConfirmationDialog/ConfirmationDialog';
 import CardFormModal from './CardForm/CardFormModal';
-import ConfirmationDialog from '../Library/ConfirmationDialog/ConfirmationDialog';
-
+import { deleteLink } from "../../Firebase/Link/deleteLink";
 
 function CardPage() {
-    const [filter, setFilter] = React.useState('');
     const [selectedCard, setSelectedCard] = useState<CardModel>();
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [confirmationDialog, setConfirmationDialog] = useState(false);
-
-    const handleChange = (event: SelectChangeEvent) => {
-        setFilter(event.target.value);
-    };
-
+    const [filteredCards, setFilteredCards] = useState<CardModel[]>([]);
     const [cards, setCards] = useState<CardModel[]>([]);
-
-    const fetchCards = async () => {
-        setCards(await getLinks());
-    };
+    const [search, setSearch] = useState<string>();
+    const [sorting, setSorting] = useState<string>();
 
     useEffect(() => {
         fetchCards();
-    }, []);
+    }, [search, sorting]);
+
+    const fetchCards = async () => {
+        const cards = await getLinks(search, sorting);
+        setCards(cards);
+        setFilteredCards(cards);
+    };
 
     const handleAddClick = async (event: any) => {
         event.preventDefault();
@@ -42,53 +36,65 @@ function CardPage() {
 
     const closeModal = () => {
         setIsCardModalOpen(false);
+        setSelectedCard(undefined);
     };
 
-    const editCard = (card: CardModel) => {
+    const handleEdit = (card: CardModel) => {
         setSelectedCard(card);
         setIsCardModalOpen(true);
     }
 
-    const deleteCard = (card: CardModel) => {
+    const handleDelete = async (card: CardModel) => {
         setSelectedCard(card);
         setConfirmationDialog(true);
     }
 
-    const closeConfirmationDialog = () => {
+    const closeConfirmationDialog = async (result: boolean) => {
         setConfirmationDialog(false)
+
+        if (result && selectedCard) {
+            await deleteLink(selectedCard.id);
+            await fetchCards();
+        }
     }
 
+    const filterBySearch = async (event: any) => {
+        const value = event.target.value;
+        if (value === '') {
+            setSearch(undefined);
+        } else {
+            setSearch(value);
+        }
+    };
+
+    const onSortingChange = async (event: ChangeEvent<HTMLSelectElement>) => {
+        if (event.target.value === 'byTitle') {
+            setSorting('title');
+        }
+        else {
+            setSorting(undefined);
+        }
+    }
 
     return (
         <div className="card__page">
             <div className="nav__search">
                 <div className="search">
-                    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} >
-                        <InputLabel id="demo-simple-select-standard-label">Filter</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-standard-label"
-                            id="demo-simple-select-standard"
-                            value={filter}
-                            onChange={handleChange}
-                            label="Filter"
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>By date</MenuItem>
-                            <MenuItem value={20}>By name</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <input className="search__input" placeholder="Search..." type="text" name="text" />
+                    <label>Sort</label>
+                    <select onChange={onSortingChange}>
+                        <option value="byDate">By Date</option>
+                        <option value="byTitle">By Title</option>
+                    </select>
+                    <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                 </div>
             </div>
             <Button onClick={handleAddClick} variant="contained" size="large" sx={{ maxWidth: 200 }}>
                 + Add new link
             </Button>
             <div className="cards-grid">
-                {cards.map((card) => (
+                {filteredCards.map((card) => (
                     <div key={card.id}>
-                        <CardItem card={card} editCard={editCard} deleteCard={deleteCard} />
+                        <CardItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
                     </div>
                 ))}
             </div>
@@ -102,11 +108,10 @@ function CardPage() {
             }
             <ConfirmationDialog
                 isOpen={confirmationDialog}
-                closeModal={closeConfirmationDialog}
+                closeDialog={closeConfirmationDialog}
             />
         </div>
     )
 }
 
 export default CardPage;
-

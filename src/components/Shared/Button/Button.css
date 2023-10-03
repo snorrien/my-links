@@ -5,8 +5,7 @@ button {
     color: white;
     padding: 0.7em 1em;
     padding-left: 0.9em;
-    display: flex;
-    align-items: center;
+    text-align: center;
     border: none;
     border-radius: 16px;
     overflow: hidden;
