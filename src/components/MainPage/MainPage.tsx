@@ -1,10 +1,10 @@
 import "./MainPage.css";
 import { useState } from "react";
 import Modal from "../Shared/Modal/Modal";
-import LogIn from "../Shared/LogIn/LogIn";
 import Register from "../Shared/Register/Register";
 import Button from "../Shared/Button/Button";
 import { ModalState } from "./ModalState";
+import Login from "../Shared/Login/Login";
 
 const MainPage: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +51,7 @@ const MainPage: React.FC = () => {
             <Modal title={getModalTitle()} isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 {modalState === ModalState.Login && (
                     <div>
-                        <LogIn />
+                        <Login />
                         <p className="login__toggle">
                             Don't have an account?
                             <a className="toggle_link" href="#" onClick={() => setModalState(ModalState.Register)}>Register</a>

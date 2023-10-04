@@ -1,11 +1,13 @@
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
+import { getAuth } from "firebase/auth";
 
-export async function addLink() {
+export async function addLink() { 
     await addDoc(collection(db, "cards"), {
       id: generateFirebaseId(10),
       title: 'New title',
       description: "https://bla.bla.bla...",
+      userId: getAuth().currentUser?.uid,
       createDate: new Date()
     });
 }

@@ -1,53 +1,52 @@
-import "./LogIn.css";
+import "./Login.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useState } from "react";
-import { logIn } from "../../../Firebase/Authentication/logIn";
+import { login } from "../../../Firebase/Authentication/login";
 
-const LogIn = () => {
+const Login = () => {
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [validationResult, setValidationResult] = useState('');
+    const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
 
-    async function handleRegisterClick() {
+
+    async function handleLoginClick() {
         validateInputs();
-        await logIn(email, password);
-        getUserData();
+        await login(email, password);    
     };
 
-    function getUserData(){
+    function isEmailValid(value: string) {
+        if (!/^[\w\.-]+@[\w\.-]+$/.test(value)) {
+            return 'Invalid email';
+        } 
+    }
 
+    function isPasswordValid(value: string) {
+        if (value.length < 6 ) {
+            return 'Invalid password';
+        }
     }
 
     function validateInputs() {
-        const emailPattern = /^[\w\.-]+@[\w\.-]+$/;
-
-        if (!email.match(emailPattern)) {
-            setValidationResult('Invalid email');
-        } else if (password.length < 6) {
-            setValidationResult('Invalid password');
-        } else {
-            setValidationResult('Ok');
-        }
-    };
+        setEmailError(isEmailValid(email));
+        setPasswordError(isPasswordValid(password));
+    }
 
     return (
         <div>
             <div className='cardForm'>
                 <Input
-                    label='Email' 
+                    label='Email'
                     placeholder="Email"
-                    value={email}
-                    handleChange={(e: any) => setEmail(e.target.value)}></Input>
+                    onChange={setEmail}
+                    error={emailError}
+                ></Input>
                 <Input
-                    className ={emailError ? 'invalid-email' : ''} 
                     label='Password'
                     placeholder="Password"
-                    value={password}
-                    handleChange={(e: any) => setPassword(e.target.value)}
-                    
+                    onChange={setPassword}
+                    error={passwordError}
                 ></Input>
             </div>
             <div className="login__bottom">
@@ -58,12 +57,10 @@ const LogIn = () => {
                     </div>
                     <a href="#" className="login__forgot">Forgot Password?</a>
                 </div>
-                <Button text='Login' onClick={validateInputs} />
-
+                <Button text='Login' onClick={handleLoginClick} />
             </div>
-
-        </div >
+        </div>
     );
 }
 
-export default LogIn;
+export default Login;
