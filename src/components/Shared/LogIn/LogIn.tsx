@@ -2,18 +2,23 @@ import "./Login.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useState } from "react";
-import { login } from "../../../Firebase/Authentication/login";
+import { authenticate } from "../../../Firebase/Authentication/authenticate";
+import { selectUser } from "../../../states/userSlice";
+import { useAppSelector } from "../../../hooks/reduxHooks";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
-
+    
+    const user = useAppSelector(selectUser);
 
     async function handleLoginClick() {
         validateInputs();
-        await login(email, password);    
+        await authenticate(email, password);   
+        console.log(user);
+
     };
 
     function isEmailValid(value: string) {

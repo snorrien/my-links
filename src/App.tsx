@@ -4,8 +4,6 @@ import MainPage from './components/MainPage/MainPage';
 import CardPage from './components/Card/CardPage';
 import Navbar from './components/Navbar/Navbar';
 
-import { Provider } from 'react-redux'
-
 function App() {
   return (
     <div className="App">

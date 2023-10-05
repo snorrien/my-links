@@ -1,5 +1,6 @@
 import "./MainPage.css";
 import { useState } from "react";
+import GameMap from "../Game/GameMap";
 import Modal from "../Shared/Modal/Modal";
 import Register from "../Shared/Register/Register";
 import Button from "../Shared/Button/Button";
@@ -51,7 +52,7 @@ const MainPage: React.FC = () => {
             <Modal title={getModalTitle()} isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 {modalState === ModalState.Login && (
                     <div>
-                        <Login />
+                        <Login  />
                         <p className="login__toggle">
                             Don't have an account?
                             <a className="toggle_link" href="#" onClick={() => setModalState(ModalState.Register)}>Register</a>

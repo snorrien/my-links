@@ -39,6 +39,9 @@ function Navbar() {
             <li className="nav__item">
               <a href="#" className="nav__link">Contact</a>
             </li>
+            <li>
+              <i className="ri-login-box-line"></i>
+            </li>
           </ul>
 
           <div className="nav__close" id="nav-close" onClick={handleToggleMenu}>
