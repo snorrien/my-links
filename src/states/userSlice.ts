@@ -18,7 +18,8 @@ export const userSlice = createSlice({
         userAuthenticated: (state, action: PayloadAction<string>) => {
             state.isLoggedIn = true;
             state.email = action.payload;
-        }
+        },
+
     }
 })
 export const { userAuthenticated } = userSlice.actions;

@@ -5,33 +5,34 @@ import { useState } from "react";
 import { authenticate } from "../../../Firebase/authenticate/authenticate";
 import { selectUser } from "../../../states/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
-    
+    const navigate = useNavigate();
+
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
 
     async function handleLoginClick() {
         validateInputs();
-
         dispatch(authenticate(email, password));
-
         console.log(user);
+        navigate("/card");
 
     };
 
     function isEmailValid(value: string) {
         if (!/^[\w\.-]+@[\w\.-]+$/.test(value)) {
             return 'Invalid email';
-        } 
+        }
     }
 
     function isPasswordValid(value: string) {
-        if (value.length < 6 ) {
+        if (value.length < 6) {
             return 'Invalid password';
         }
     }
@@ -40,6 +41,8 @@ const Login = () => {
         setEmailError(isEmailValid(email));
         setPasswordError(isPasswordValid(password));
     }
+
+
 
     return (
         <div>
