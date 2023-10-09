@@ -2,9 +2,9 @@ import "./Login.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useState } from "react";
-import { authenticate } from "../../../Firebase/Authentication/authenticate";
+import { authenticate } from "../../../Firebase/authenticate/authenticate";
 import { selectUser } from "../../../states/userSlice";
-import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,10 +13,13 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
     
     const user = useAppSelector(selectUser);
+    const dispatch = useAppDispatch();
 
     async function handleLoginClick() {
         validateInputs();
-        await authenticate(email, password);   
+
+        dispatch(authenticate(email, password));
+
         console.log(user);
 
     };

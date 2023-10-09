@@ -5,7 +5,8 @@ import Modal from "../Shared/Modal/Modal";
 import Register from "../Shared/Register/Register";
 import Button from "../Shared/Button/Button";
 import { ModalState } from "./ModalState";
-import Login from "../Shared/Login/Login";
+import Login from "../Shared/Login/LogIn";
+
 
 const MainPage: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);

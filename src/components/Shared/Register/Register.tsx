@@ -2,7 +2,7 @@ import "./Register.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useState } from "react";
-import { register } from "../../../Firebase/Authentication/register";
+import { register } from "../../../Firebase/authenticate/register";
 import { getAuth } from "firebase/auth";
 
 type Props = {
