@@ -1,6 +1,5 @@
 import "./MainPage.css";
 import { useState } from "react";
-import GameMap from "../Game/GameMap";
 import Modal from "../Shared/Modal/Modal";
 import Register from "../Shared/Register/Register";
 import Button from "../Shared/Button/Button";

@@ -1,11 +1,11 @@
-export class CardModel {
+export class LinkModel {
   public id: string = "";
   public title: string = "";
   public description: string = "";
   public createDate: Date = new Date();
 }
 
-export class UpdateCardModel {
+export class UpdateLinkModel {
   public id: string = "";
   public title: string = "";
   public description: string = "";

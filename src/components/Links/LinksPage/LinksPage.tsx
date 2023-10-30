@@ -1,20 +1,20 @@
-import "./CardPage.css";
-import CardItem from "./CardItem/CardItem";
+import "./LinksPage.css";
+import LinkItem from "../LinkItem/LinkItem";
 import { Button } from '@mui/material';
 import { useState, useEffect, ChangeEvent } from 'react';
-import { CardModel } from '../../Models/CardModel';
-import { addLink } from '../../Firebase/Link/addLink';
-import { getLinks } from '../../Firebase/Link/getLinks';
-import ConfirmationDialog from '../Shared/ConfirmationDialog/ConfirmationDialog';
-import CardFormModal from './CardForm/CardFormModal';
-import { deleteLink } from "../../Firebase/Link/deleteLink";
+import { LinkModel } from '../../../Models/LinkModel';
+import { addLink } from '../../../Firebase/Link/addLink';
+import { getLinks } from '../../../Firebase/Link/getLinks';
+import ConfirmationDialog from '../../Shared/ConfirmationDialog/ConfirmationDialog';
+import LinkFormModal from '../LinkForm/LinkFormModal';
+import { deleteLink } from "../../../Firebase/Link/deleteLink";
 
-function CardPage() {
-    const [selectedCard, setSelectedCard] = useState<CardModel>();
+function LinksPage() {
+    const [selectedCard, setSelectedCard] = useState<LinkModel>();
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [confirmationDialog, setConfirmationDialog] = useState(false);
-    const [filteredCards, setFilteredCards] = useState<CardModel[]>([]);
-    const [cards, setCards] = useState<CardModel[]>([]);
+    const [filteredCards, setFilteredCards] = useState<LinkModel[]>([]);
+    const [cards, setCards] = useState<LinkModel[]>([]);
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
 
@@ -39,12 +39,12 @@ function CardPage() {
         setSelectedCard(undefined);
     };
 
-    const handleEdit = (card: CardModel) => {
+    const handleEdit = (card: LinkModel) => {
         setSelectedCard(card);
         setIsCardModalOpen(true);
     }
 
-    const handleDelete = async (card: CardModel) => {
+    const handleDelete = async (card: LinkModel) => {
         setSelectedCard(card);
         setConfirmationDialog(true);
     }
@@ -94,12 +94,12 @@ function CardPage() {
             <div className="cards-grid">
                 {filteredCards.map((card) => (
                     <div key={card.id}>
-                        <CardItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
+                        <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
                     </div>
                 ))}
             </div>
             {selectedCard &&
-                <CardFormModal
+                <LinkFormModal
                     card={selectedCard}
                     isOpen={isCardModalOpen}
                     closeModal={closeModal}
@@ -114,4 +114,4 @@ function CardPage() {
     )
 }
 
-export default CardPage;
+export default LinksPage;

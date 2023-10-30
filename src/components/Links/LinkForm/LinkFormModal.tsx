@@ -1,17 +1,17 @@
 import { ChangeEvent, useState } from "react";
-import { CardModel } from "../../../Models/CardModel";
-import "./CardFormModal.css";
-import { updateCard } from "../../../Firebase/Link/updateCard";
+import { LinkModel } from "../../../Models/LinkModel";
+import "./LinkFormModal.css";
+import { updateCard } from "../../../Firebase/Link/updateLink";
 import Modal from "../../Shared/Modal/Modal";
 
 type Props = {
-    card: CardModel;
+    card: LinkModel;
     isOpen: boolean,
     closeModal: any;
     fetchCards: any;
 }
 
-const CardFormModal: React.FC<Props> = ({ card, isOpen, closeModal, fetchCards }) => {
+const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal, fetchCards }) => {
     const [title, setTitle] = useState(card.title);
     const [description, setDescription] = useState(card.description);
 
@@ -50,4 +50,4 @@ const CardFormModal: React.FC<Props> = ({ card, isOpen, closeModal, fetchCards }
     );
 }
 
-export default CardFormModal;
+export default LinkFormModal;

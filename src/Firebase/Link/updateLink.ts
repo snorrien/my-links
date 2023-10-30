@@ -1,9 +1,9 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { UpdateCardModel } from "../../Models/CardModel";
+import { UpdateLinkModel } from "../../Models/LinkModel";
 
 
-export async function updateCard(card: UpdateCardModel) {
+export async function updateCard(card: UpdateLinkModel) {
     const linkRef = doc(db, "cards", card.id);
 
     await updateDoc(linkRef, {

@@ -19,10 +19,13 @@ export const userSlice = createSlice({
             state.isLoggedIn = true;
             state.email = action.payload;
         },
-
+        invalidCredentials: (state) => {
+            state.isLoggedIn = false;
+            state.email = '';
+        }
     }
 })
-export const { userAuthenticated } = userSlice.actions;
+export const { userAuthenticated, invalidCredentials } = userSlice.actions;
 export const selectUser = (state: RootState) => state.user;
 export default userSlice.reducer;
 

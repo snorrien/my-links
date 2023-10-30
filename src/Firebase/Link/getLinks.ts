@@ -1,9 +1,9 @@
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../firebase";
-import { CardModel } from "../../Models/CardModel";
+import { LinkModel } from "../../Models/LinkModel";
 import { getAuth } from "firebase/auth";
 
-export async function getLinks(search?: string, sorting: string = "createDate"): Promise<CardModel[]> {
+export async function getLinks(search?: string, sorting: string = "createDate"): Promise<LinkModel[]> {
     const userId = getAuth().currentUser?.uid;
     if (!userId) {
         return [];
@@ -19,7 +19,7 @@ export async function getLinks(search?: string, sorting: string = "createDate"):
 
     const querySnapshot = await getDocs(getCardsQuery);
 
-    const cards: CardModel[] = [];
+    const cards: LinkModel[] = [];
     querySnapshot.forEach((doc) => {
         cards.push({
             id: doc.id,

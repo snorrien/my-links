@@ -1,7 +1,0 @@
-.map__body{
-    display: flex;
-    flex-wrap: wrap;
-    width: 560px;
-    height:560px;
-    border: 2px solid black;
-}

@@ -1,7 +1,7 @@
 import "./Login.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authenticate } from "../../../Firebase/authenticate/authenticate";
 import { selectUser } from "../../../states/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
@@ -14,15 +14,21 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
     const navigate = useNavigate();
 
-    const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
+    const user = useAppSelector(selectUser);
 
+  
+    useEffect(() => {
+        if (user.isLoggedIn) {
+            navigate("/card");
+        } else if (user.isLoggedIn === false) {
+            return
+        }
+    }, [user.isLoggedIn]);
+    
     async function handleLoginClick() {
         validateInputs();
         dispatch(authenticate(email, password));
-        console.log(user);
-        navigate("/card");
-
     };
 
     function isEmailValid(value: string) {

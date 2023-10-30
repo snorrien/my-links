@@ -1,17 +1,17 @@
-/*=============CARDS=============*/
-
-.card {
+.linkItem {
   margin: 0;
   position: relative;
-}
-
-.card__body {
   max-width: 250px;
   max-height: 300px;
   background: white;
   border-radius: 30px;
   transition: 0.2s ease-in-out;
+}
 
+.linkItem_image{
+  width: 300px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .card__body:hover {
@@ -43,16 +43,16 @@
 
 
 
-.edit:hover {
+.button_edit:hover {
   background-color: rgb(199, 199, 199);
 }
 
 
-.edit:hover path {
+.button_edit:hover path {
   fill: white;
 }
 
-.edit {
+.button_edit{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,7 +158,6 @@
   color: grey;
   font-size: 12px;
 }
-
 
 .main-title {
   font-size: clamp(2rem, 5vw + 1rem, 5rem);
