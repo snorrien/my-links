@@ -33,7 +33,7 @@ function LinkItem({ card, editCard, deleteCard }: Props) {
                     </div>
                 </div>
                 <div className="content__link">
-                    {card.description}
+                   <a href= {card.description} target="_blank">{card.description} </a> 
                 </div>
             </div>
         </div >

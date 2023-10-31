@@ -7,6 +7,7 @@ import { getLinks } from '../../../Firebase/Link/getLinks';
 import ConfirmationDialog from '../../Shared/ConfirmationDialog/ConfirmationDialog';
 import LinkFormModal from '../LinkForm/LinkFormModal';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
+import LinksFolders from "../LinksFolders/LinksFolders";
 
 function LinksPage() {
     const [selectedCard, setSelectedCard] = useState<LinkModel>();
@@ -77,38 +78,41 @@ function LinksPage() {
 
     return (
         <div className="card__page">
-            <div className="nav__search">
-                <div className="search">
-                    <label>Sort</label>
-                    <select onChange={onSortingChange}>
-                        <option value="byDate">By Date</option>
-                        <option value="byTitle">By Title</option>
-                    </select>
-                    <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
-                </div>
-            </div>
-            <button onClick={handleAddClick}>
-                + Add new link
-            </button>
-            <div className="cards-grid">
-                {filteredCards.map((card) => (
-                    <div key={card.id}>
-                        <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
+            <LinksFolders />
+            <div className="links__wrapper">
+                <div className="nav__search">
+                    <div className="search">
+                        <label>Sort</label>
+                        <select onChange={onSortingChange}>
+                            <option value="byDate">By Date</option>
+                            <option value="byTitle">By Title</option>
+                        </select>
+                        <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                     </div>
-                ))}
-            </div>
-            {selectedCard &&
-                <LinkFormModal
-                    card={selectedCard}
-                    isOpen={isCardModalOpen}
-                    closeModal={closeModal}
-                    fetchCards={fetchCards}
+                </div>
+                <button onClick={handleAddClick}>
+                    + Add new link
+                </button>
+                <div className="cards-grid">
+                    {filteredCards.map((card) => (
+                        <div key={card.id}>
+                            <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
+                        </div>
+                    ))}
+                </div>
+                {selectedCard &&
+                    <LinkFormModal
+                        card={selectedCard}
+                        isOpen={isCardModalOpen}
+                        closeModal={closeModal}
+                        fetchCards={fetchCards}
+                    />
+                }
+                <ConfirmationDialog
+                    isOpen={confirmationDialog}
+                    closeDialog={closeConfirmationDialog}
                 />
-            }
-            <ConfirmationDialog
-                isOpen={confirmationDialog}
-                closeDialog={closeConfirmationDialog}
-            />
+            </div>
         </div>
     )
 }

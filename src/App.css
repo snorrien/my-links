@@ -26,12 +26,15 @@ body {
   font-family: var(--body-font);
   color: var(--text-color);
   background: var(--body-gradient);
-  user-select: none;
 }
 
 img {
   max-width: 100%;
   height: auto;
+}
+
+button{
+  user-select: none;
 }
 
 ul {

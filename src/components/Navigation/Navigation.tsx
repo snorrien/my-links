@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Navigation.css";
 import Modal from "../Shared/Modal/Modal";
 import Register from "../Shared/Register/Register";
 import Button from "../Shared/Button/Button";
 import { ModalState } from "./ModalState";
 import Login from "../Shared/Login/LogIn";
+import { selectUser } from "../../states/userSlice";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
-const Navigation:React.FC = () =>  {
+const Navigation: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isSignOut, setIsSignOut] = useState(false);
   const [modalState, setModalState] = useState<ModalState>(ModalState.Login);
+  const user = useAppSelector(selectUser);
+
+  useEffect(() => {
+    if (user.isLoggedIn) {
+      setIsOpen(false)
+      setIsSignOut(true)
+    }
+   
+  }, [user.isLoggedIn]);
 
   function handleLoginClick() {
     setIsOpen(true)
@@ -32,33 +44,43 @@ const Navigation:React.FC = () =>  {
     }
   }
 
+  function handleSignOutClick() {
+    
+  }
+
   return (
     <div className="navigation">
       <nav className="navigation__container">
         <a href="/" className="navigation__logo">
           MYLINKS
         </a>
-        <ul className="navigation__list">
-          <li className="list-item">
+        <div className="navigation__list">
+          <div className="list-item">
             <a href="#" className="nav__link">Contact</a>
-          </li>
-          <li>
-            <button className='white-button navigation__button' onClick={()=> handleLoginClick()} >Log in</button>
-          </li>
-          <li>
-            <button className='navigation__button' onClick={()=> handleRegisterClick() }>Sign up</button>
-          </li>
-        </ul>
+          </div>
+          {!isSignOut ?
+            (
+              <div className="navigation__list">
+                <button className='white-button navigation__button' onClick={() => handleLoginClick()}>Log in</button>
+                <button className='navigation__button' onClick={() => handleRegisterClick()}>Sign up</button>
+              </div>
+            ) :
+            (
+              <button className='navigation__button' onClick={() => handleSignOutClick()}>Sign out</button>
+            )
+          }
+
+        </div>
       </nav>
       <Modal title={getModalTitle()} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        { modalState === ModalState.Login && (
+        {modalState === ModalState.Login && (
           <div>
             <Login />
             <p className="login__toggle">
               Don't have an account?
               <a className="toggle_link" href="#" onClick={() => setModalState(ModalState.Register)}>Register</a>
             </p>
-          </div>  
+          </div>
         )}
         {modalState === ModalState.Register && (
           <div>

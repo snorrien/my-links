@@ -4,7 +4,10 @@
     justify-content: center;
     background-color: white;
     position: absolute;
-    top: 0
+    z-index: 100;
+    top: 0;
+    position: fixed;
+    border:1px solid rgb(192, 190, 190)
 }
 
 .navigation__container {

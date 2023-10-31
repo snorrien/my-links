@@ -1,0 +1,15 @@
+.folders__wrapper{
+    height: 100%;
+    background-color: white;
+    position: fixed;
+    width:15rem;
+    border:1px solid rgb(192, 190, 190)
+}
+
+.folders_list{
+display: flex;
+flex-direction: column ;
+gap: 1.5rem;
+padding: 5rem 1rem 1rem;
+
+}
