@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { LinkModel } from "../../../Models/LinkModel";
 import "./LinkFormModal.css";
-import { updateCard } from "../../../Firebase/Link/updateLink";
+import { updateLink } from "../../../Firebase/Link/updateLink";
 import Modal from "../../Shared/Modal/Modal";
 
 type Props = {
@@ -24,7 +24,7 @@ const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal, fetchCards }
     }
     
     async function handleModalClose() {
-        await updateCard({
+        await updateLink({
             id: card!.id,
             title: title!,
             description: description!

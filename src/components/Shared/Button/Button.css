@@ -3,20 +3,22 @@ button {
     font-size: 16px;
     background: royalblue;
     color: white;
-    padding: 0.7em 1em;
+    padding: .5em 1em;
     padding-left: 0.9em;
     text-align: center;
-    border: none;
-    border-radius: 16px;
+    border: 2px solid royalblue;
+    border-radius: 10px;
     overflow: hidden;
     transition: all 0.2s;
   }
 
-  button:hover{
+  button:hover {
     cursor: pointer;
-    background: rgb(72, 112, 235);
+    background: rgb(39, 73, 175);
+    border: 2px solid rgb(39, 73, 175);
   }
   
-  button:active {
-  border: 1px solid grey
+  button:active{
+    background: rgb(34, 62, 146);
+    border: 2px solid rgb(34, 62, 146);
   }

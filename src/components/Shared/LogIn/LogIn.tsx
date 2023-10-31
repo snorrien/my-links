@@ -16,11 +16,10 @@ const Login = () => {
 
     const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
-
   
     useEffect(() => {
         if (user.isLoggedIn) {
-            navigate("/card");
+            navigate("/link");
         } else if (user.isLoggedIn === false) {
             return
         }
@@ -47,8 +46,6 @@ const Login = () => {
         setEmailError(isEmailValid(email));
         setPasswordError(isPasswordValid(password));
     }
-
-
 
     return (
         <div>

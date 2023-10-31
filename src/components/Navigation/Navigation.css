@@ -1,0 +1,54 @@
+.navigation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    position: absolute;
+    top: 0
+}
+
+.navigation__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1024px;
+    height: 60px;
+}
+
+.navigation__logo {
+    font-weight: 700;
+}
+
+.navigation__logo,
+.navigation__list {
+    color: var(--text-color);
+}
+
+.navigation__list {
+    text-align: center;
+    display: flex;
+    gap: 1rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.white-button {
+    background-color: white;
+    color: rgb(72, 71, 71);
+    border: 2px solid white;
+}
+
+.white-button:hover {
+    background-color: white;
+    border: 2px solid rgb(39, 73, 175);
+}
+
+.white-button:active {
+    background: rgb(34, 62, 146);
+    border: 2px solid rgb(34, 62, 146);
+    color: white;
+}
+
+.navigation__button{
+    width: 100px;
+}

@@ -1,6 +1,5 @@
 import "./LinksPage.css";
 import LinkItem from "../LinkItem/LinkItem";
-import { Button } from '@mui/material';
 import { useState, useEffect, ChangeEvent } from 'react';
 import { LinkModel } from '../../../Models/LinkModel';
 import { addLink } from '../../../Firebase/Link/addLink';
@@ -88,9 +87,9 @@ function LinksPage() {
                     <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                 </div>
             </div>
-            <Button onClick={handleAddClick} variant="contained" size="large" sx={{ maxWidth: 200 }}>
+            <button onClick={handleAddClick}>
                 + Add new link
-            </Button>
+            </button>
             <div className="cards-grid">
                 {filteredCards.map((card) => (
                     <div key={card.id}>
