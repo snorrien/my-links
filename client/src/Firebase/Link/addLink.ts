@@ -2,6 +2,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
 
+// Http requests to backend (http://localhost:3000) instead
 export async function addLink() { 
     await addDoc(collection(db, "cards"), {
       id: generateFirebaseId(10),

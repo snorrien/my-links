@@ -1,7 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { userAuthenticated, invalidCredentials } from "../../states/userSlice";
 
-
 export function authenticate(email: string, password: string) {
   return async function authenticateThunk(dispatch: any) {
     const auth = getAuth();
