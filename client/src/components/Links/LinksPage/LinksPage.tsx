@@ -10,13 +10,14 @@ import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import LinksFolders from "../LinksFolders/LinksFolders";
 
 function LinksPage() {
+    const [isShowFolderList, setIsShowFolderList] = useState(true);
     const [selectedCard, setSelectedCard] = useState<LinkModel>();
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [confirmationDialog, setConfirmationDialog] = useState(false);
     const [filteredCards, setFilteredCards] = useState<LinkModel[]>([]);
-    const [cards, setCards] = useState<LinkModel[]>([]);
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
+
 
     useEffect(() => {
         fetchCards();
@@ -24,8 +25,8 @@ function LinksPage() {
 
     const fetchCards = async () => {
         const cards = await getLinks(search, sorting);
-        setCards(cards);
         setFilteredCards(cards);
+        console.log(filteredCards)
     };
 
     const handleAddClick = async (event: any) => {
@@ -76,10 +77,14 @@ function LinksPage() {
         }
     }
 
+    function clickFolderList() {
+        setIsShowFolderList((prevIsShowFolderList) => !prevIsShowFolderList);
+    }
+
     return (
-        <div className="card__page">
-            <LinksFolders />
-            <div className="links__wrapper">
+        <div className='card__page'>
+            <LinksFolders clickFolderList={clickFolderList} />
+            <div className={`links__wrapper ${isShowFolderList ? 'show-list-folders' : 'hide-list-folders'}`}>
                 <div className="nav__search">
                     <div className="search">
                         <label>Sort</label>

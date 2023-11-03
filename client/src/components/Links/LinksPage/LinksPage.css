@@ -2,15 +2,25 @@
   margin: auto;
   min-height: 100vh;
   width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
 }
 
-.links__wrapper{
-  padding: 6rem 4.5rem 2rem;
-  min-height: 100vh;
+.show-list-folders{
+  padding: 6rem 15rem 2rem 0rem;
+}
+.hide-list-folders{
+  padding: 6rem 3rem 2rem;
+}
+
+
+.links__wrapper {
+  
+  transition: transform 0.5s;
   flex-direction: column;
   display: flex;
   gap: 2rem;
-  margin-left: 13rem;
+  
 }
 
 /*==============SEARCH=============*/
@@ -20,7 +30,8 @@
   color: rgba(182, 176, 176, 1);
   margin: 0;
   border-radius: 10px;
-  width: 100%
+  width: 100%;
+  
 }
 
 .search {

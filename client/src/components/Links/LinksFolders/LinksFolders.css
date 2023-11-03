@@ -1,15 +1,63 @@
-.folders__wrapper{
+.folders__wrapper {
     height: 100%;
     background-color: white;
-    position: fixed;
-    width:15rem;
-    border:1px solid rgb(192, 190, 190)
+    width: 15rem;
+    border: 1px solid rgb(192, 190, 190);
+    transition: transform 0.5s;
 }
 
-.folders_list{
-display: flex;
-flex-direction: column ;
-gap: 1.5rem;
-padding: 5rem 1rem 1rem;
+.folders_list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 5rem .5rem .5rem;
 
 }
+
+.move-left {
+    transform: translateX(-100%);
+  }
+
+.folders_list-item {
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.folders_list-item:hover {
+    background-color: rgb(240, 237, 233);
+    cursor: pointer;
+}
+
+.ring-button {
+    border-radius: 50%;
+    border: 1px solid grey;
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 13rem;
+}
+
+.arrow {
+    position: absolute;
+    top:23px;
+    left: 25px;
+    width: 0;
+    height: 0;
+    border: solid grey;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotateZ(135deg) translateY(0px);
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(.59, 1.39, .37, 1.01);
+}
+
+.left {
+    transform: rotateZ(-45deg) translateY(2px);
+    left: 35px;
+}
+
+
