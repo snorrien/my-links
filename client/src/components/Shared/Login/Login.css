@@ -1,11 +1,21 @@
-.login__bottom{
-gap: 1.5rem;
-display: flex;
-flex-direction:column;
-padding-top: 1.5rem;
+.login__bottom {
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5rem;
 }
 
-.login__info{
-display: flex;
-justify-content: space-between;
+.login__bottom__userIsUndefind {
+    font-size: 16px;
+    font-weight: 20px;
+    color: rgb(227, 88, 88);
+    text-align: center;
+}
+
+.login__info {
+    display: flex;
+    justify-content: space-between;
+}
+.hide{
+    display: none;
 }

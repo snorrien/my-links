@@ -5,9 +5,11 @@ type Props = {
     label: string,
     placeholder?: string,
     error?: string;
+    type?: string;
+    autoComplete?: string;
 }
 
-const Input: React.FC<Props> = ({ label, placeholder, onChange, error }) => {
+const Input: React.FC<Props> = ({ label, placeholder, onChange, error, type, autoComplete }) => {
 
     return (
         <div className='text__input'>
@@ -15,7 +17,7 @@ const Input: React.FC<Props> = ({ label, placeholder, onChange, error }) => {
                 <label>{label}</label>
                 <label className={`error-message ${error ? 'error' : ''}`}>{error}</label>
             </div>
-            <input className={`input ${error ? 'invalid' : ''}`} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
+            <input className={`input ${error ? 'invalid' : ''}`} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} type={type} name={autoComplete} autoComplete={autoComplete} />
         </div>
     );
 }

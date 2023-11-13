@@ -14,18 +14,16 @@ export function authenticate(email: string, password: string) {
     // });
 
     const auth = getAuth();
-
-    await signInWithEmailAndPassword(auth, email, password);
-    setPersistence(auth, browserSessionPersistence)
-      .then(result => {
-        dispatch(userAuthenticated(email));
-        return signInWithEmailAndPassword(auth, email, password);
-      })
-      .catch(error => {
-        dispatch(invalidCredentials());
-      });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setPersistence(auth, browserSessionPersistence)
+        .then(result => {
+          dispatch(userAuthenticated(email));
+          return signInWithEmailAndPassword(auth, email, password);
+        })
+    } catch (err) {
+      dispatch(invalidCredentials());
+    }
   }
 }
-
-
 

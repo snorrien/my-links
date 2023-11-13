@@ -12,11 +12,12 @@ const Login = () => {
     const [emailError, setEmailError] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
+    const [userIsUndefind, setUserIsUndefind] = useState(false);
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
-  
+
     useEffect(() => {
         if (user.isLoggedIn) {
             navigate("/link");
@@ -24,10 +25,17 @@ const Login = () => {
             return
         }
     }, [user.isLoggedIn]);
-    
+
     async function handleLoginClick() {
         validateInputs();
         dispatch(authenticate(email, password));
+   if (user.isLoggedIn === false) {
+       return setUserIsUndefind(true)
+    }
+    else {
+        
+        setUserIsUndefind(false)
+     }
     };
 
     function isEmailValid(value: string) {
@@ -55,12 +63,16 @@ const Login = () => {
                     placeholder="Email"
                     onChange={setEmail}
                     error={emailError}
+                    type="email"
+                    autoComplete="username"
                 ></Input>
                 <Input
                     label='Password'
                     placeholder="Password"
                     onChange={setPassword}
                     error={passwordError}
+                    type="password"
+                    autoComplete="current-password"
                 ></Input>
             </div>
             <div className="login__bottom">
@@ -70,6 +82,9 @@ const Login = () => {
                         <label className="login__check-label">Remember me</label>
                     </div>
                     <a href="#" className="login__forgot">Forgot Password?</a>
+                </div>
+                <div className={`login__bottom__userIsUndefind ${!userIsUndefind ? 'hide' : ''}`}>
+                    <p>There is <b>NO USER</b><br />with this username and password </p>
                 </div>
                 <Button text='Login' onClick={handleLoginClick} />
             </div>

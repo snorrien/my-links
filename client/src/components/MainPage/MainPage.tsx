@@ -21,13 +21,29 @@ const MainPage = () => {
                         <div className="home__shadow"></div>
                     </div>
                 </div>
-                <footer className="home__footer">
-                    <span>(554) 987-654</span>
-                    <span>|</span>
-                    <span>info@company.com</span>
-                </footer>
             </section>
-
+            <section className="about">
+                <div className="about__container">
+                    <div className="about__name">
+                        <h1 className="about__title">About platform</h1>
+                        <p className="about__subtitle">MyLink is the ultimate online platform for effortlessly saving and organizing all
+                            your favorite web links in one convenient place. </p>
+                    </div>
+                    <div className="about__description">
+                        <div className="description-element">
+                            <p className="description-title">Save</p>
+                            <p>Say goodbye to cluttered browser
+                                bookmarks and scattered links across multiple devices. No more worrying about losing your links when switching devices.</p>
+                        </div>
+                        <div className="description-element">
+                            <p className="description-title"> Organize</p>
+                            <p>Organize and categorize web links with just a few clicks.
+                                Intuitive interface for quick and easy link entry and retrieval.
+                                Assign tags and descriptions to links for enhanced searchability.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </div>
     );
