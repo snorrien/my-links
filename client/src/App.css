@@ -2,7 +2,7 @@
 
 :root {
   /*========== Colors ==========*/
-  --title-color: #fff;
+  --common-color: #fff;
   --text-color: hsl(235, 20%, 57%);
   --shape-gradient: linear-gradient(90deg,
                   hsl(300, 76%, 60%),

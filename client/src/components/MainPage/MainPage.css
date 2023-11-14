@@ -70,20 +70,21 @@
 
 .about {
     padding: 1rem 0 2rem;
+    width: 100%;
+
 }
 
 .about__container {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .about__name {
     display: flex;
     flex-direction: column;
     text-align: center;
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-
 }
 
 .about__title {
@@ -94,16 +95,38 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
+    background-color: rgb(114, 114, 215);
+    padding: 20px;
+    border-radius: 30px;
+    width: 100%;
 }
 
 .description-element {
     background-color: #fff;
     padding: 1rem;
     border-radius: 30px;
-    width: 200px;
+    width: 400px;
+    text-align: start;
+}
+
+.description-title {
+    font-size: 25px;
+    font-weight: 600;
 
 }
 
+.about__list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.about__me{
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 30px;
+    width: 600px;
+    text-align: start;
+}
 
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */

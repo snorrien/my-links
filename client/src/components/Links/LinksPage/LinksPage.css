@@ -30,10 +30,8 @@
   color: rgba(182, 176, 176, 1);
   margin: 0;
   border-radius: 10px;
-  width: 100%;
+  width:50%;
   display: flex;
-  
-  
 }
 
 .search {
@@ -42,7 +40,7 @@
   justify-content: space-between;
   text-align: center;
   width: 600px;
-  margin: 0 3rem;
+  margin: 10px 3rem;
 }
 
 .search__input {
@@ -73,8 +71,17 @@
   color: #ccc;
 }
 
-.MenuItem {
-  color: rgb(98, 22, 22);
+.sort{
+  outline: none;
+  width:150px;
+  height: 45px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  padding: 5px;
+}
+
+.add-link-button{
+  width:200px;
 }
 
 /*=============CARDS=============*/
@@ -84,3 +91,20 @@
   gap: 2rem;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
+
+
+.deleteAnimation {
+  animation: compressionAnimation 0.5s ease-in-out;
+}
+
+@keyframes compressionAnimation {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.3);
+  }
+}
+
+

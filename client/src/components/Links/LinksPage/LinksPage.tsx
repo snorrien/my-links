@@ -1,6 +1,6 @@
 import "./LinksPage.css";
 import LinkItem from "../LinkItem/LinkItem";
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent, useRef } from 'react';
 import { LinkModel } from '../../../Models/LinkModel';
 import { addLink } from '../../../Firebase/Link/addLink';
 import { getLinks } from '../../../Firebase/Link/getLinks';
@@ -17,6 +17,8 @@ function LinksPage() {
     const [filteredCards, setFilteredCards] = useState<LinkModel[]>([]);
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
+    const [removedCardId, setRemovedCardId] = useState<string | null>(null);
+    const inputRef = useRef(null);
 
 
     useEffect(() => {
@@ -54,6 +56,10 @@ function LinksPage() {
         setConfirmationDialog(false)
 
         if (result && selectedCard) {
+            setRemovedCardId(selectedCard.id);
+            setTimeout(() => {
+                setRemovedCardId(null);
+            }, 500); 
             await deleteLink(selectedCard.id);
             await fetchCards();
         }
@@ -81,26 +87,29 @@ function LinksPage() {
         setIsShowFolderList((prevIsShowFolderList) => !prevIsShowFolderList);
     }
 
+    function getCardClass(cardId:string): string | undefined {
+        return removedCardId===cardId ? 'deleteAnimation' : '';
+    }
+
     return (
         <div className='card__page'>
             <LinksFolders clickFolderList={clickFolderList} />
             <div className={`links__wrapper ${isShowFolderList ? 'show-list-folders' : 'hide-list-folders'}`}>
                 <div className="nav__search">
                     <div className="search">
-                        <label>Sort</label>
-                        <select onChange={onSortingChange}>
-                            <option value="byDate">By Date</option>
-                            <option value="byTitle">By Title</option>
+                        <select onChange={onSortingChange} className="sort">
+                            <option className='sort-item' value="byDate">By Date</option>
+                            <option className='sort-item' value="byTitle">By Title</option>
                         </select>
                         <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                     </div>
                 </div>
-                <button onClick={handleAddClick}>
+                <button onClick={handleAddClick} className="add-link-button">
                     + Add new link
                 </button>
                 <div className="cards-grid">
                     {filteredCards.map((card) => (
-                        <div key={card.id}>
+                        <div key={card.id} className={getCardClass(card.id)}>
                             <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
                         </div>
                     ))}

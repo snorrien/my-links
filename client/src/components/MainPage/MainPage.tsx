@@ -42,6 +42,20 @@ const MainPage = () => {
                                 Assign tags and descriptions to links for enhanced searchability.</p>
                         </div>
                     </div>
+                    <div className="about__list">
+                        <div>QUICK</div>
+                        <div>EASY</div>
+                        <div>FREE</div>
+                        <div>FUNNY</div>
+                    </div>
+                    <div className="about__me">
+                        <p>Hi!</p>
+                        <p>In this site I tried to implement the functionality that I personally needed.
+                            If there isn't something that satisfies my needs, I'll just do it.
+                            That's how this project came about.</p>
+                        <img></img>
+                        
+                    </div>
                 </div>
             </section>
 
