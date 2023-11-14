@@ -17,7 +17,7 @@ const MainPage = () => {
                     </div>
 
                     <div className="home__img">
-                        <img src="imgs/ghost.png" alt="" />
+                        <img src="imgs/ghost.png" />
                         <div className="home__shadow"></div>
                     </div>
                 </div>
@@ -43,23 +43,44 @@ const MainPage = () => {
                         </div>
                     </div>
                     <div className="about__list">
-                        <div>QUICK</div>
-                        <div>EASY</div>
-                        <div>FREE</div>
-                        <div>FUNNY</div>
+                        <div className="about__list-scroll">
+                            <div className="about__list-li">
+                                <p >save</p>
+                                <p >EASY</p>
+                                <p >FREE</p>
+                                <p>FUNNY</p>
+                                <p>QUICK</p>
+                                <p>allow</p>
+                                <p >save</p>
+                                <p >EASY</p>
+                                <p >FREE</p>
+                                <p>FUNNY</p>
+                                <p>QUICK</p>
+                                <p>allow</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="about__way">
+
                     </div>
                     <div className="about__me">
                         <p>Hi!</p>
                         <p>In this site I tried to implement the functionality that I personally needed.
                             If there isn't something that satisfies my needs, I'll just do it.
                             That's how this project came about.</p>
-                        <img></img>
-                        
+                        <div className="me__author">
+                            <img className="author-image" src="imgs/author.jpg" />
+                            <div className="author-data">
+                                <p className="author-name">Alena Shapovalova</p>
+                                <p className="author-profession">Frontend Developer</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </section>
+            </section >
 
-        </div>
+        </div >
     );
 }
 

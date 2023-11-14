@@ -1,14 +1,19 @@
-/*=============== HOME ===============*/
+.main-page {
+    width: 100vw;
+}
+
 .home {
-    padding: 9rem 0 2rem;
+    padding: 13rem 0 2rem;
     height: 100vh;
-    display: grid;
+    background: var(--body-gradient);
 }
 
 .home__container {
     display: grid;
     align-content: center;
     row-gap: 2.5rem;
+    max-width: 1000px;
+    margin: auto;
 }
 
 .home__data {
@@ -24,7 +29,7 @@
     margin-top: 2rem;
     display: inline-block;
     background-color: var(--text-color);
-    color: #fff;
+    color: var(--common-color);
     padding: .80rem 1.5rem;
     border-radius: 3rem;
     transition: .4s;
@@ -69,9 +74,9 @@
 }
 
 .about {
-    padding: 1rem 0 2rem;
+    padding: 10rem 0 2rem;
     width: 100%;
-
+    background-color: #18154c;
 }
 
 .about__container {
@@ -92,22 +97,30 @@
 }
 
 .about__description {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
-    background-color: rgb(114, 114, 215);
-    padding: 20px;
+    display: flex;
+    text-align: center;
+    background-color: rgb(166, 166, 220);
+    padding: 1rem;
     border-radius: 30px;
-    width: 100%;
+    gap: 1rem;
+    width: 700px;
+    margin: auto;
 }
 
 .description-element {
-    background-color: #fff;
+    background-color: var(--common-color);
     padding: 1rem;
     border-radius: 30px;
     width: 400px;
     text-align: start;
 }
+
+.description-element:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+}
+
+
 
 .description-title {
     font-size: 25px;
@@ -116,18 +129,81 @@
 }
 
 .about__list {
+
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    height: 50px;
+    background-color: black;
 }
 
-.about__me{
-    background-color: #fff;
+.about__list-scroll {
+    white-space: nowrap;
+    margin: 0 5rem;
+}
+
+.about__list-li {
+    display: flex;
+    animation: move-words 5s infinite linear;
+}
+
+.about__list-li p {
+    white-space: nowrap;
+    font-size: 24px;
+    text-transform: uppercase;
+    padding: 0 5rem;
+    letter-spacing: 1px;
+    background: hsl(265, 100%, 80%);
+    background: linear-gradient(to right, hsl(265, 100%, 80%) 0%, hsl(22, 100%, 84%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+@keyframes move-words {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.about__me {
+    background-color: var(--common-color);
     padding: 1rem;
     border-radius: 30px;
     width: 600px;
     text-align: start;
+    margin: auto
 }
 
+.me__author{
+display: flex;
+padding-top: 2rem;
+align-items: center;
+}
+
+.author-image{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.author-data{
+    padding-left: 20px;
+}
+
+.author-name{
+font-weight: 600;
+
+font-size: 14px;
+}
+.author-profession{
+    font-size: 14px;
+
+}
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 320px) {

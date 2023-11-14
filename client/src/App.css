@@ -25,7 +25,7 @@
 body {
   font-family: var(--body-font);
   color: var(--text-color);
-  background: var(--body-gradient);
+  background: var(--common-color);
 }
 
 img {
