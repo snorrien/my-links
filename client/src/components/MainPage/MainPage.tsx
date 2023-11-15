@@ -18,8 +18,8 @@ const MainPage = () => {
 
                     <div className="home__img">
                         <img src="imgs/ghost.png" />
-                        <div className="home__shadow"></div>
-                    </div>
+                                                   <div className="home__shadow"></div> 
+                                            </div>
                 </div>
             </section>
             <section className="about">
@@ -49,16 +49,35 @@ const MainPage = () => {
                     </div>
                     <div className="about__description">
                         <div className="description-element">
-                            <p className="description-title">Save</p>
-                            <p>Say goodbye to cluttered browser
-                                bookmarks and scattered links across multiple devices. No more worrying about losing your links when switching devices.</p>
+                            <div className="description-inner">
+                                <div className="description-front">
+                                    <p className="description-title">Save</p>
+                                </div>
+                                <div className="description-back">
+                                    <p className="description-title">Save</p>
+                                    <p>Say goodbye to cluttered browser
+                                        bookmarks and scattered links across multiple devices. No more worrying about losing your links when switching devices.</p>
+                                </div>
+                            </div>
                         </div>
                         <div className="description-element">
-                            <p className="description-title"> Organize</p>
-                            <p>Organize and categorize web links with just a few clicks.
-                                Intuitive interface for quick and easy link entry and retrieval.
-                                Assign tags and descriptions to links for enhanced searchability.</p>
+
+                            <div className="description-inner">
+                                <div className="description-front">
+                                    <p className="description-title">Organize</p>
+                                </div>
+                                <div className="description-back">
+                                    <p className="description-title"> Organize</p>
+                                    <p>Organize and categorize web links with just a few clicks.
+                                        Intuitive interface for quick and easy link entry and retrieval.
+                                        Assign tags and descriptions to links for enhanced searchability.</p>
+                                </div>
+                            </div>
+
+
+
                         </div>
+
                         <div className="description__me">
                             <p>Hi!</p>
                             <p>In this site I tried to implement the functionality that I personally needed.

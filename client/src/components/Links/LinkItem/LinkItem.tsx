@@ -11,12 +11,6 @@ type Props = {
 
 function LinkItem({ card, editCard, deleteCard }: Props) {
 
-
-
- 
-    
-
-
     const handleEditCard = (card: LinkModel) => {
         editCard(card);
     };

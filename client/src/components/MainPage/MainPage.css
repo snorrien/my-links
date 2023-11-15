@@ -14,7 +14,7 @@
     row-gap: 2.5rem;
     max-width: 1000px;
     margin: auto;
-}
+    }
 
 .home__data {
     text-align: center;
@@ -42,7 +42,7 @@
 .home__img img {
     width: 230px;
     animation: floaty 1.8s infinite alternate;
-}
+    }
 
 .home__img {
     justify-self: center;
@@ -66,6 +66,7 @@
     align-self: flex-end;
 }
 
+
 .login__toggle {
     display: flex;
     padding-top: 1.5rem;
@@ -87,7 +88,7 @@
 }
 
 .about__name {
-    padding-top: 7rem;
+    padding-top: 4rem;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -99,14 +100,15 @@
 .about__title {
     font-size: var(--biggest-font-size);
     color: var(--common-color);
-    
+
 }
 
 .about__description {
     display: flex;
+    justify-content: space-between;
     text-align: center;
-    background-color: rgb(166, 166, 220);
-    padding: 1rem;
+    background-color: var(--body-gradient);
+    padding: .5rem;
     border-radius: 30px;
     gap: 1rem;
     width: 700px;
@@ -115,21 +117,60 @@
 }
 
 .description-element {
-    background-color: var(--common-color);
-    padding: 1rem;
+    height: 400px;
     border-radius: 30px;
-    width: 400px;
-    text-align: start;
+    width: 300px;
+    perspective: 1000px;
 }
 
-.description-element:hover {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    cursor: pointer;
+.description-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.999s;
+}
+
+.description-element:hover .description-inner {
+    transform: rotateY(180deg);
+}
+
+
+.description-front,
+.description-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.description-front {
+    background: var(--body-gradient);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    font-size: 24px;
+    transform: rotateY(0deg);
+}
+
+.description-back {
+    padding: 1rem;
+    background-color: #fff;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    transform: rotateY(180deg);
 }
 
 .description-title {
     font-size: 25px;
     font-weight: 600;
+    padding: 2rem;
 }
 
 .about__list {
@@ -177,7 +218,7 @@
     position: absolute;
     bottom: -25rem;
     background-color: var(--common-color);
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 30px;
     width: 600px;
     text-align: start;
@@ -209,11 +250,11 @@
 
 .author-profession {
     font-size: 14px;
-    color:grey;
+    color: grey;
     font-weight: 300;
 }
 
-.start{
+.start {
     padding-top: 15rem;
     padding-bottom: 3rem;
     text-align: center;
@@ -222,13 +263,13 @@
     margin: auto;
 }
 
-.start__title{
+.start__title {
     font-size: var(--biggest-font-size);
     margin: .75rem 0;
 }
 
-.button-start{
-    width:100px;
+.button-start {
+    width: 100px;
     margin: auto;
 }
 
