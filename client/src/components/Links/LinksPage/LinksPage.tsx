@@ -1,6 +1,6 @@
 import "./LinksPage.css";
 import LinkItem from "../LinkItem/LinkItem";
-import { useState, useEffect, ChangeEvent, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { LinkModel } from '../../../Models/LinkModel';
 import { addLink } from '../../../Firebase/Link/addLink';
 import { getLinks } from '../../../Firebase/Link/getLinks';
@@ -8,6 +8,7 @@ import ConfirmationDialog from '../../Shared/ConfirmationDialog/ConfirmationDial
 import LinkFormModal from '../LinkForm/LinkFormModal';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import LinksFolders from "../LinksFolders/LinksFolders";
+import Dropdown from "../../Shared/Dropdown/Dropdown";
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
@@ -18,8 +19,6 @@ function LinksPage() {
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
-    const inputRef = useRef(null);
-
 
     useEffect(() => {
         fetchCards();
@@ -54,12 +53,11 @@ function LinksPage() {
 
     const closeConfirmationDialog = async (result: boolean) => {
         setConfirmationDialog(false)
-
         if (result && selectedCard) {
             setRemovedCardId(selectedCard.id);
             setTimeout(() => {
                 setRemovedCardId(null);
-            }, 500); 
+            }, 500);
             await deleteLink(selectedCard.id);
             await fetchCards();
         }
@@ -74,21 +72,20 @@ function LinksPage() {
         }
     };
 
-    const onSortingChange = async (event: ChangeEvent<HTMLSelectElement>) => {
-        if (event.target.value === 'byTitle') {
+    const onSortingChange = async (selectedOption: string) => {
+        if (selectedOption === 'byTitle') {
             setSorting('title');
-        }
-        else {
+        } else {
             setSorting(undefined);
         }
-    }
+    };
 
     function clickFolderList() {
         setIsShowFolderList((prevIsShowFolderList) => !prevIsShowFolderList);
     }
 
-    function getCardClass(cardId:string): string | undefined {
-        return removedCardId===cardId ? 'deleteAnimation' : '';
+    function getCardClass(cardId: string): string | undefined {
+        return removedCardId === cardId ? 'deleteAnimation' : '';
     }
 
     return (
@@ -97,10 +94,9 @@ function LinksPage() {
             <div className={`links__wrapper ${isShowFolderList ? 'show-list-folders' : 'hide-list-folders'}`}>
                 <div className="nav__search">
                     <div className="search">
-                        <select onChange={onSortingChange} className="sort">
-                            <option className='sort-item' value="byDate">By Date</option>
-                            <option className='sort-item' value="byTitle">By Title</option>
-                        </select>
+                        <Dropdown
+                            items={["byDate", "byTitle"]}
+                            onChange={onSortingChange} />
                         <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                     </div>
                 </div>
@@ -127,7 +123,7 @@ function LinksPage() {
                     closeDialog={closeConfirmationDialog}
                 />
             </div>
-        </div>
+        </div >
     )
 }
 

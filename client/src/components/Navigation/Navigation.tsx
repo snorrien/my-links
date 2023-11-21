@@ -56,7 +56,7 @@ const Navigation: React.FC = () => {
         </a>
         <div className="navigation__list">
           <div className="list-item">
-            <a href="#" className="nav__link">Contact</a>
+            <a href="/contact" className="nav__link">Contact</a>
           </div>
           {!isSignOut ?
             (

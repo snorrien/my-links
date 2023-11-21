@@ -3,9 +3,10 @@
 }
 
 .home {
-    padding: 13rem 0 2rem;
     height: 100vh;
     background: var(--body-gradient);
+    display: flex;
+    align-content: center;
 }
 
 .home__container {

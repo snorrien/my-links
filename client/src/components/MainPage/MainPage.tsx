@@ -11,21 +11,21 @@ const MainPage = () => {
                         <p className="home__description">
                             Looks like you want to save some links <br /> right?
                         </p>
-                        <a href="#" className="home__button" >
+                        <a href="#about" className="home__button" >
                             Continue
                         </a>
                     </div>
 
                     <div className="home__img">
                         <img src="imgs/ghost.png" />
-                                                   <div className="home__shadow"></div> 
-                                            </div>
+                        <div className="home__shadow"></div>
+                    </div>
                 </div>
             </section>
-            <section className="about">
-                <div className="about__container">
+            <section className="about" id='about'>
+                <div className="about__container" >
                     <div className="about__list">
-                        <div className="about__list-scroll">
+                        <div className="about__list-scroll" >
                             <div className="about__list-li">
                                 <p >save</p>
                                 <p >EASY</p>

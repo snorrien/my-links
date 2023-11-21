@@ -1,0 +1,33 @@
+.contact-page {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+    gap: 4rem;
+    width:800px;
+
+}
+
+.contact__data {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem
+}
+
+.contact__title{
+font-size: 24px;
+color: var(--text-color)
+}
+
+.contact__form{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width:100%;
+}
+Textarea{
+    max-height: 300px;
+}
+
+
