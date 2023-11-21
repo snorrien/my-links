@@ -27,7 +27,7 @@ const Dropdown: React.FC<Props> = ({ items, onChange }) => {
             </div>
             <div className={`dropdown__arrow ${isOpen ? '' : 'dropdown__arrow-expanded'}`}></div>
             <div className={` ${isOpen ? 'dropdown__items' : 'dropdown__items-hidden'}`}>
-                <ul>
+                <ul className="">
                     {items.map(item => (
                         <li className="dropdown__item"
                             onClick={() => onItemClicked(item)} key={Math.random()}> {item}

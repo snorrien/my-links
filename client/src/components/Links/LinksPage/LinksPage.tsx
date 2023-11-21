@@ -91,7 +91,7 @@ function LinksPage() {
     return (
         <div className='card__page'>
             <LinksFolders clickFolderList={clickFolderList} />
-            <div className={`links__wrapper ${isShowFolderList ? 'show-list-folders' : 'hide-list-folders'}`}>
+            <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
                 <div className="nav__search">
                     <div className="search">
                         <Dropdown

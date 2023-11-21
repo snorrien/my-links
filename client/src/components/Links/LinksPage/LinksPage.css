@@ -2,36 +2,34 @@
   margin: auto;
   min-height: 100vh;
   width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr;
   background: var(--body-gradient);
+  display: flex;
+
 }
 
-.show-list-folders{
-  padding: 6rem 15rem 2rem 0rem;
-}
-.hide-list-folders{
-  padding: 6rem 3rem 2rem;
+.show-list-folders {
+  padding: 6rem 1rem 1rem 18rem;
 }
 
+.hide-list-folders {
+  padding: 6rem 1rem 1rem 3rem;
+}
 
 .links__wrapper {
-  
   transition: transform 0.5s;
   flex-direction: column;
   display: flex;
   gap: 2rem;
-  
+  justify-content: center;
 }
 
 /*==============SEARCH=============*/
 .nav__search {
   background-color: white;
   border: none;
-  color: rgba(182, 176, 176, 1);
   margin: 0;
   border-radius: 10px;
-  width:50%;
+  width: 50%;
   display: flex;
 }
 
@@ -39,7 +37,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  text-align: center;
   width: 600px;
   margin: 10px 3rem;
 }
@@ -72,25 +69,27 @@
   color: #ccc;
 }
 
-.sort{
+.sort {
   outline: none;
-  width:150px;
+  width: 150px;
   height: 45px;
   border-radius: 12px;
   border: 1.5px solid lightgrey;
   padding: 5px;
 }
 
-.add-link-button{
-  width:200px;
+.add-link-button {
+  width: 200px;
 }
 
 /*=============CARDS=============*/
 
 .cards-grid {
+  max-width: 1400px;
   display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 
@@ -107,5 +106,3 @@
     transform: scale(0.3);
   }
 }
-
-

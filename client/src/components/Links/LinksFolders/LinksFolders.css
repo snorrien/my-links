@@ -1,9 +1,12 @@
 .folders__wrapper {
-    height: 100%;
+    height: 100vh;
     background-color: white;
     width: 15rem;
     border: 1px solid rgb(192, 190, 190);
     transition: transform 0.5s;
+    position: fixed;
+   
+
 }
 
 .folders_list {
