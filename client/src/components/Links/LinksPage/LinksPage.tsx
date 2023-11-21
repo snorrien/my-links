@@ -9,6 +9,8 @@ import LinkFormModal from '../LinkForm/LinkFormModal';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import LinksFolders from "../LinksFolders/LinksFolders";
 import Dropdown from "../../Shared/Dropdown/Dropdown";
+import { useAppSelector } from "../../../hooks/reduxHooks";
+import { selectUser } from "../../../states/userSlice";
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
@@ -19,6 +21,10 @@ function LinksPage() {
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
+
+
+    const user = useAppSelector(selectUser);
+    console.log(user.isLoggedIn);
 
     useEffect(() => {
         fetchCards();
@@ -95,7 +101,7 @@ function LinksPage() {
                 <div className="nav__search">
                     <div className="search">
                         <Dropdown
-                            items={["byDate", "byTitle"]}
+                            items={["by Date", "by Title"]}
                             onChange={onSortingChange} />
                         <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                     </div>

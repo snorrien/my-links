@@ -1,7 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 
-const auth = getAuth();
-export async function register(email: string, password: string) {
+export async function userSignOut() {
     const auth = getAuth();
     await signOut(auth)
         .then(() => {

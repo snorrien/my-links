@@ -23,7 +23,7 @@ const Dropdown: React.FC<Props> = ({ items, onChange }) => {
     return (
         <div className="dropdown" onClick={toggling}>
             <div className="dropdown__label">
-                {selectedOption} 
+                {selectedOption|| "Choose option"} 
             </div>
             <div className={`dropdown__arrow ${isOpen ? '' : 'dropdown__arrow-expanded'}`}></div>
             <div className={` ${isOpen ? 'dropdown__items' : 'dropdown__items-hidden'}`}>

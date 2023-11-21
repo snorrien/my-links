@@ -3,9 +3,18 @@
   min-height: 100vh;
   width: 100%;
   background: var(--body-gradient);
-  display: flex;
-
 }
+
+.links__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  max-width: 1400px;
+  gap: 2rem;
+  justify-content: center;
+}
+
 
 .show-list-folders {
   padding: 6rem 1rem 1rem 18rem;
@@ -15,13 +24,7 @@
   padding: 6rem 1rem 1rem 3rem;
 }
 
-.links__wrapper {
-  transition: transform 0.5s;
-  flex-direction: column;
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-}
+
 
 /*==============SEARCH=============*/
 .nav__search {

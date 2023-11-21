@@ -27,15 +27,21 @@ const Login = () => {
     }, [user.isLoggedIn]);
 
     async function handleLoginClick() {
-        validateInputs();
-        dispatch(authenticate(email, password));
-   if (user.isLoggedIn === false) {
-       return setUserIsUndefind(true)
-    }
-    else {
-        
-        setUserIsUndefind(false)
-     }
+        const emailError = isEmailValid(email);
+        const passwordError = isPasswordValid(password);
+
+        if (emailError || passwordError) {
+            setEmailError(emailError);
+            setPasswordError(passwordError);
+        } else {
+            await dispatch(authenticate(email, password));
+            if (user.isLoggedIn === false) {
+                setUserIsUndefind(true)
+            }
+            else {
+                setUserIsUndefind(false)
+            }
+        }
     };
 
     function isEmailValid(value: string) {
