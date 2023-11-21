@@ -1,4 +1,3 @@
-import userReducer from './states/userSlice'
 import { applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { configureStore } from '@reduxjs/toolkit';
@@ -8,7 +7,6 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
 const store = configureStore({
     reducer: {
-        user: userReducer,
     },
     enhancers: [composedEnhancer]
 })

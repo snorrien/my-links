@@ -9,8 +9,7 @@ import LinkFormModal from '../LinkForm/LinkFormModal';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import LinksFolders from "../LinksFolders/LinksFolders";
 import Dropdown from "../../Shared/Dropdown/Dropdown";
-import { useAppSelector } from "../../../hooks/reduxHooks";
-import { selectUser } from "../../../states/userSlice";
+import { getAuth } from "firebase/auth";
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
@@ -22,18 +21,16 @@ function LinksPage() {
     const [sorting, setSorting] = useState<string>();
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
 
-
-    const user = useAppSelector(selectUser);
-    console.log(user.isLoggedIn);
-
     useEffect(() => {
-        fetchCards();
+        getAuth().onAuthStateChanged(() => {
+            fetchCards();
+        })
+        
     }, [search, sorting]);
 
     const fetchCards = async () => {
         const cards = await getLinks(search, sorting);
         setFilteredCards(cards);
-        console.log(filteredCards)
     };
 
     const handleAddClick = async (event: any) => {

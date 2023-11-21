@@ -3,9 +3,9 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useEffect, useState } from "react";
 import { authenticate } from "../../../Firebase/authenticate/authenticate";
-import { selectUser } from "../../../states/userSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -14,17 +14,7 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
     const [userIsUndefind, setUserIsUndefind] = useState(false);
     const navigate = useNavigate();
-
-    const dispatch = useAppDispatch();
-    const user = useAppSelector(selectUser);
-
-    useEffect(() => {
-        if (user.isLoggedIn) {
-            navigate("/link");
-        } else if (user.isLoggedIn === false) {
-            return
-        }
-    }, [user.isLoggedIn]);
+    const auth = getAuth();
 
     async function handleLoginClick() {
         const emailError = isEmailValid(email);
@@ -34,12 +24,12 @@ const Login = () => {
             setEmailError(emailError);
             setPasswordError(passwordError);
         } else {
-            await dispatch(authenticate(email, password));
-            if (user.isLoggedIn === false) {
-                setUserIsUndefind(true)
-            }
-            else {
+            await authenticate(email, password);
+            if (auth.currentUser) {
                 setUserIsUndefind(false)
+                navigate("/link");
+            } else {
+                setUserIsUndefind(true)
             }
         }
     };
@@ -54,11 +44,6 @@ const Login = () => {
         if (value.length < 6) {
             return 'Invalid password';
         }
-    }
-
-    function validateInputs() {
-        setEmailError(isEmailValid(email));
-        setPasswordError(isPasswordValid(password));
     }
 
     return (
