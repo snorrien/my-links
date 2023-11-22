@@ -5,7 +5,6 @@ import Register from "../Shared/Register/Register";
 import Button from "../Shared/Button/Button";
 import { ModalState } from "./ModalState";
 import Login from "../Shared/Login/LogIn";
-import { useAppSelector } from "../../hooks/reduxHooks";
 import { userSignOut } from "../../Firebase/authenticate/signOut";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
@@ -16,15 +15,16 @@ const Navigation: React.FC = () => {
   const [isSignOut, setIsSignOut] = useState(false);
   const [modalState, setModalState] = useState<ModalState>(ModalState.Login);
   const navigate = useNavigate();
-  const auth = getAuth();
 
   useEffect(() => {
-    if (auth.currentUser) {
-      setIsOpen(false)
-      setIsSignOut(true)
-    }
+    getAuth().onAuthStateChanged(() => {
+      if (getAuth().currentUser) {
+        setIsOpen(false)
+        setIsSignOut(true)
+      }
+    })
 
-  }, [auth.currentUser]);
+  }, [getAuth().currentUser]);
 
   function handleLoginClick() {
     setIsOpen(true)
