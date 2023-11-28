@@ -20,7 +20,7 @@ function LinkItem({ card, editCard, deleteCard }: Props) {
     };
 
     return (
-        <div className="linkItem">
+        <div className="linkItem" >
             <img className="linkItem_image" src="./imgs/dog.jpg" />
             <div className="linkItem__content">
                 <div className="content__title">

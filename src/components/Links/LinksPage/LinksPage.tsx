@@ -10,6 +10,7 @@ import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import LinksFolders from "../LinksFolders/LinksFolders";
 import Dropdown from "../../Shared/Dropdown/Dropdown";
 import { getAuth } from "firebase/auth";
+import Draggable from 'react-draggable';
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
@@ -20,6 +21,8 @@ function LinksPage() {
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
+    const [widget, setWidget] = useState<string[]>([]);
+
 
     useEffect(() => {
         getAuth().onAuthStateChanged(() => {
@@ -34,7 +37,7 @@ function LinksPage() {
     };
 
     const handleAddClick = async (event: any) => {
-        event.preventDefault();
+        event.preventDefault(); 
         await addLink();
         await fetchCards();
     };
@@ -91,9 +94,27 @@ function LinksPage() {
         return removedCardId === cardId ? 'deleteAnimation' : '';
     }
 
-    return (
+    function handleOnDrag(e: React.DragEvent, cardId: string) {
+        console.log(e)
+        console.log(cardId)
+        e.dataTransfer.setData("json", cardId)
+    }
+
+    function handleOnDrop(e: React.DragEvent) {
+        const widgetType = e.dataTransfer.getData("")
+    }
+
+    function handleOnDragOver(e: React.DragEvent) {
+        e.preventDefault();
+    }
+
+
+    return(
         <div className='card__page'>
-            <LinksFolders clickFolderList={clickFolderList} />
+            <LinksFolders
+                clickFolderList={clickFolderList}
+                onDrop = {handleOnDrop}
+                onDragOver = {handleOnDragOver} />
             <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
                 <div className="nav__search">
                     <div className="search">
@@ -108,8 +129,12 @@ function LinksPage() {
                 </button>
                 <div className="cards-grid">
                     {filteredCards.map((card) => (
-                        <div key={card.id} className={getCardClass(card.id)}>
-                            <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
+                        <div key={card.id}
+                            className={getCardClass(card.id)}
+                            onDragStart={(e: any) => handleOnDrag(e, card.id)}
+                            draggable>
+                                
+                            <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete}/>
                         </div>
                     ))}
                 </div>

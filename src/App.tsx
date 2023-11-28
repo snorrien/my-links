@@ -5,7 +5,9 @@ import LinksPage from './components/Links/LinksPage/LinksPage';
 import Navigation from './components/Navigation/Navigation';
 import ContactPage from './components/ContactPage/ContactPage';
 
+
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>
