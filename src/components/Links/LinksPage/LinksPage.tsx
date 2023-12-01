@@ -1,16 +1,18 @@
 import "./LinksPage.css";
+import React from "react";
 import LinkItem from "../LinkItem/LinkItem";
 import { useState, useEffect } from 'react';
 import { LinkModel } from '../../../Models/LinkModel';
+import { FolderModel } from "../../../Models/FolderModel";
 import { addLink } from '../../../Firebase/Link/addLink';
 import { getLinks } from '../../../Firebase/Link/getLinks';
 import ConfirmationDialog from '../../Shared/ConfirmationDialog/ConfirmationDialog';
 import LinkFormModal from '../LinkForm/LinkFormModal';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
-import LinksFolders from "../LinksFolders/LinksFolders";
+import Folders from "../Folders/Folders";
 import Dropdown from "../../Shared/Dropdown/Dropdown";
 import { getAuth } from "firebase/auth";
-import Draggable from 'react-draggable';
+import { DragDropContext, Draggable, DropResult, Droppable } from "react-beautiful-dnd";
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
@@ -21,14 +23,12 @@ function LinksPage() {
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
-    const [widget, setWidget] = useState<string[]>([]);
-
 
     useEffect(() => {
         getAuth().onAuthStateChanged(() => {
             fetchCards();
         })
-        
+
     }, [search, sorting]);
 
     const fetchCards = async () => {
@@ -37,7 +37,7 @@ function LinksPage() {
     };
 
     const handleAddClick = async (event: any) => {
-        event.preventDefault(); 
+        event.preventDefault();
         await addLink();
         await fetchCards();
     };
@@ -90,67 +90,84 @@ function LinksPage() {
         setIsShowFolderList((prevIsShowFolderList) => !prevIsShowFolderList);
     }
 
+    function handleOpenFolder(folder: FolderModel) {
+        
+    }
+
+
     function getCardClass(cardId: string): string | undefined {
         return removedCardId === cardId ? 'deleteAnimation' : '';
     }
 
-    function handleOnDrag(e: React.DragEvent, cardId: string) {
-        console.log(e)
-        console.log(cardId)
-        e.dataTransfer.setData("json", cardId)
+
+    const onDragEnd = (result: DropResult) => {
+        console.log(result)
     }
 
-    function handleOnDrop(e: React.DragEvent) {
-        const widgetType = e.dataTransfer.getData("")
-    }
-
-    function handleOnDragOver(e: React.DragEvent) {
-        e.preventDefault();
-    }
-
-
-    return(
+    return (
         <div className='card__page'>
-            <LinksFolders
-                clickFolderList={clickFolderList}
-                onDrop = {handleOnDrop}
-                onDragOver = {handleOnDragOver} />
-            <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
-                <div className="nav__search">
-                    <div className="search">
-                        <Dropdown
-                            items={["by Date", "by Title"]}
-                            onChange={onSortingChange} />
-                        <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
-                    </div>
-                </div>
-                <button onClick={handleAddClick} className="add-link-button">
-                    + Add new link
-                </button>
-                <div className="cards-grid">
-                    {filteredCards.map((card) => (
-                        <div key={card.id}
-                            className={getCardClass(card.id)}
-                            onDragStart={(e: any) => handleOnDrag(e, card.id)}
-                            draggable>
-                                
-                            <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete}/>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Folders clickFolderList={clickFolderList} />
+
+                <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
+                    <div className="nav__search">
+                        <div className="search">
+                            <Dropdown
+                                items={["by Date", "by Title"]}
+                                onChange={onSortingChange} />
+                            <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                         </div>
-                    ))}
-                </div>
-                {selectedCard &&
-                    <LinkFormModal
-                        card={selectedCard}
-                        isOpen={isCardModalOpen}
-                        closeModal={closeModal}
-                        fetchCards={fetchCards}
+                    </div>
+                    <button onClick={handleAddClick} className="add-link-button">
+                        + Add new link
+                    </button>
+                    <Droppable droppableId="filteredCards" isDropDisabled={true} >
+                        {(provided, snapshot) => (
+                            <div className="cards-grid" ref={provided.innerRef} data-DraggingOver={snapshot.isDraggingOver}>
+                                {filteredCards.map((card, index) => (
+                                    <Draggable
+                                        key={card.id}
+                                        draggableId={card.id}
+                                        index={index}>
+                                        {(provided, snapshot) => (
+                                            <React.Fragment>
+                                                <div key={card.id}
+                                                    style={
+                                                        provided.draggableProps
+                                                            .style
+                                                    }
+                                                    className={`draggable ${getCardClass(card.id)}`}
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}>
+                                                    <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
+                                                </div>
+                                                {snapshot.isDragging && (
+                                                    <div className="clone">
+                                                        <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
+                                                    </div>
+                                                )}
+                                            </React.Fragment>
+                                        )}
+                                    </Draggable>
+                                ))}
+                            </div>
+                        )}
+                    </Droppable>
+                    {selectedCard &&
+                        <LinkFormModal
+                            card={selectedCard}
+                            isOpen={isCardModalOpen}
+                            closeModal={closeModal}
+                            fetchCards={fetchCards}
+                        />
+                    }
+                    <ConfirmationDialog
+                        isOpen={confirmationDialog}
+                        closeDialog={closeConfirmationDialog}
                     />
-                }
-                <ConfirmationDialog
-                    isOpen={confirmationDialog}
-                    closeDialog={closeConfirmationDialog}
-                />
-            </div>
+                </div>
+            </DragDropContext>
         </div >
     )
 }

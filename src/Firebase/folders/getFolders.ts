@@ -17,7 +17,7 @@ export async function getFolders() {
     querySnapshot.forEach((doc) => {
         folders.push({
             id: doc.id,
-            title: doc.data().title,
+            title: doc.data().title
         });
     });
     return folders;

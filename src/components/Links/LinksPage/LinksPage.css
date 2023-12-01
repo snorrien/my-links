@@ -13,8 +13,8 @@
   max-width: 1400px;
   gap: 2rem;
   justify-content: center;
+  transition: padding 0.5s ease-in-out, gap 0.5s ease-in-out;
 }
-
 
 .show-list-folders {
   padding: 6rem 1rem 1rem 18rem;
@@ -23,8 +23,6 @@
 .hide-list-folders {
   padding: 6rem 1rem 1rem 3rem;
 }
-
-
 
 /*==============SEARCH=============*/
 .nav__search {
@@ -91,10 +89,9 @@
   max-width: 1400px;
   display: grid;
   gap: 1.5rem;
-  justify-items: center;
+justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
-
 
 
 .deleteAnimation {
