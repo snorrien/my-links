@@ -1,5 +1,4 @@
 import "./LinksPage.css";
-import React from "react";
 import LinkItem from "../LinkItem/LinkItem";
 import { useState, useEffect } from 'react';
 import { LinkModel } from '../../../Models/LinkModel';
@@ -12,7 +11,9 @@ import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import Folders from "../Folders/Folders";
 import Dropdown from "../../Shared/Dropdown/Dropdown";
 import { getAuth } from "firebase/auth";
-import { DragDropContext, Draggable, DropResult, Droppable } from "react-beautiful-dnd";
+import { useDrop, DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
@@ -23,23 +24,24 @@ function LinksPage() {
     const [search, setSearch] = useState<string>();
     const [sorting, setSorting] = useState<string>();
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
+    const [folderId, setFolderId] = useState<string | undefined>();
 
     useEffect(() => {
         getAuth().onAuthStateChanged(() => {
             fetchCards();
         })
 
-    }, [search, sorting]);
-
-    const fetchCards = async () => {
-        const cards = await getLinks(search, sorting);
-        setFilteredCards(cards);
-    };
+    }, [search, sorting, folderId]);
 
     const handleAddClick = async (event: any) => {
         event.preventDefault();
         await addLink();
         await fetchCards();
+    };
+
+    const fetchCards = async () => {
+        const links = await getLinks(search, sorting, folderId);
+        setFilteredCards(links);
     };
 
     const closeModal = () => {
@@ -90,24 +92,20 @@ function LinksPage() {
         setIsShowFolderList((prevIsShowFolderList) => !prevIsShowFolderList);
     }
 
-    function handleOpenFolder(folder: FolderModel) {
-        
-    }
+    function openFolder(folderId: string) {
+        console.log(folderId);
 
+        setFolderId(folderId);
+    }
 
     function getCardClass(cardId: string): string | undefined {
         return removedCardId === cardId ? 'deleteAnimation' : '';
     }
 
-
-    const onDragEnd = (result: DropResult) => {
-        console.log(result)
-    }
-
     return (
         <div className='card__page'>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Folders clickFolderList={clickFolderList} />
+            <DndProvider backend={HTML5Backend}>
+                <Folders clickFolderList={clickFolderList} openFolder={openFolder} />
 
                 <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
                     <div className="nav__search">
@@ -121,39 +119,16 @@ function LinksPage() {
                     <button onClick={handleAddClick} className="add-link-button">
                         + Add new link
                     </button>
-                    <Droppable droppableId="filteredCards" isDropDisabled={true} >
-                        {(provided, snapshot) => (
-                            <div className="cards-grid" ref={provided.innerRef} data-DraggingOver={snapshot.isDraggingOver}>
-                                {filteredCards.map((card, index) => (
-                                    <Draggable
-                                        key={card.id}
-                                        draggableId={card.id}
-                                        index={index}>
-                                        {(provided, snapshot) => (
-                                            <React.Fragment>
-                                                <div key={card.id}
-                                                    style={
-                                                        provided.draggableProps
-                                                            .style
-                                                    }
-                                                    className={`draggable ${getCardClass(card.id)}`}
-                                                    ref={provided.innerRef}
-                                                    {...provided.draggableProps}
-                                                    {...provided.dragHandleProps}>
-                                                    <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
-                                                </div>
-                                                {snapshot.isDragging && (
-                                                    <div className="clone">
-                                                        <LinkItem card={card} editCard={handleEdit} deleteCard={handleDelete} />
-                                                    </div>
-                                                )}
-                                            </React.Fragment>
-                                        )}
-                                    </Draggable>
-                                ))}
+
+                    <div className="cards-grid" >
+                        {filteredCards.map((link, index) => (
+                            <div key={link.id}
+                                className={`draggable ${getCardClass(link.id)}`}
+                            >
+                                <LinkItem link={link} editCard={handleEdit} deleteCard={handleDelete} />
                             </div>
-                        )}
-                    </Droppable>
+                        ))}
+                    </div>
                     {selectedCard &&
                         <LinkFormModal
                             card={selectedCard}
@@ -167,7 +142,7 @@ function LinksPage() {
                         closeDialog={closeConfirmationDialog}
                     />
                 </div>
-            </DragDropContext>
+            </DndProvider>
         </div >
     )
 }

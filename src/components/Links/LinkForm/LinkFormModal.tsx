@@ -27,7 +27,8 @@ const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal, fetchCards }
         await updateLink({
             id: card!.id,
             title: title!,
-            description: description!
+            description: description!,
+            folderId: card.folderId
         });
 
         await fetchCards();

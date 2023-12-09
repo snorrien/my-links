@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import { LinkModel } from "../../Models/LinkModel";
 import { getAuth } from "firebase/auth";
 
-export async function getLinks(search?: string, sorting: string = "createDate"): Promise<LinkModel[]> {
+export async function getLinks(search?: string, sorting: string = "createDate", folderId?: string): Promise<LinkModel[]> {
     const userId = getAuth().currentUser?.uid;
     if (!userId) {
         return [];
@@ -13,8 +13,16 @@ export async function getLinks(search?: string, sorting: string = "createDate"):
 
     let getCardsQuery = query(cardsRef, where("userId", "in", [userId]), orderBy(sorting));
     
-    if (search) {
+    if (search && !folderId!) {
         getCardsQuery = query(cardsRef, where("title", "in", [search]), where("userId", "in", [userId]), orderBy(sorting));
+    }
+
+    if (!search && folderId) {
+        getCardsQuery = query(cardsRef, where("folderId", "in", [folderId]), where("userId", "in", [userId]), orderBy(sorting));
+    }
+
+    if (folderId && search) {
+        getCardsQuery = query(cardsRef, where("title", "in", [search]), where("userId", "in", [userId]), where("folderId", "in", [folderId]), orderBy(sorting));
     }
 
     const querySnapshot = await getDocs(getCardsQuery);
@@ -25,7 +33,8 @@ export async function getLinks(search?: string, sorting: string = "createDate"):
             id: doc.id,
             title: doc.data().title,
             description: doc.data().description,
-            createDate: doc.data().createDate
+            createDate: doc.data().createDate,
+            folderId: doc.data().folderId
         });
     });
     return cards;

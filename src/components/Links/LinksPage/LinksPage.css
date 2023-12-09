@@ -5,6 +5,8 @@
   background: var(--body-gradient);
 }
 
+
+
 .links__wrapper {
   display: flex;
   flex-direction: column;
@@ -92,6 +94,8 @@
 justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+
+
 
 
 .deleteAnimation {
