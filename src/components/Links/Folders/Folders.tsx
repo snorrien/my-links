@@ -39,10 +39,12 @@ function Folders({ clickFolderList, openFolder }: Props) {
 
     return (
         <div className={`folders__wrapper ${isArrow ? 'move-left' : ''}`}>
+            <div className="arrows-button" onClick={toggleArrow}>
+                <div className={`arrow arrow-one ${isArrow ? 'left-one' : ''}`} ></div>
+                <div className={`arrow arrow-two ${isArrow ? 'left-two' : ''}`} ></div>
+            </div>
             <div className='folders_list' >
-                <div className="ring-button" onClick={toggleArrow}>
-                    <div className={`arrow ${isArrow ? 'left' : ''}`} ></div>
-                </div>
+
                 <button onClick={handleClick}>Add folder</button>
                 {filteredFolders.map((folder) => (
                     <div key={folder.id}>

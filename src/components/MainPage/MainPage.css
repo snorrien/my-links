@@ -19,12 +19,16 @@
 
 .home__data {
     text-align: center;
+    color:  var(--text-color);
 }
 
 .home__title {
     font-size: var(--biggest-font-size);
     margin: .75rem 0;
+    color:  var(--text-color);
 }
+
+.home
 
 .home__button {
     margin-top: 2rem;
@@ -112,7 +116,7 @@
     padding: .5rem;
     border-radius: 30px;
     gap: 1rem;
-    width: 700px;
+    width: 1000px;
     margin: auto;
     position: relative;
 }
@@ -215,63 +219,36 @@
     }
 }
 
-.description__me {
-    position: absolute;
-    bottom: -25rem;
-    background-color: var(--common-color);
-    padding: 1.5rem;
-    border-radius: 30px;
-    width: 600px;
-    text-align: start;
-    margin: auto;
-    box-shadow: rgba(25, 7, 84, 0.24) 0px 15px 20px;
-    left: 7%
-}
-
-.me__author {
+.contact-page {
     display: flex;
-    padding-top: 2rem;
     align-items: center;
-
+    margin: auto;
+    height: 100vh;
+    gap: 4rem;
+    width: 800px;
 }
 
-.author-image {
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
-}
-
-.author-data {
-    padding-left: 20px;
-}
-
-.author-name {
-    font-weight: 600;
-}
-
-.author-profession {
-    font-size: 14px;
-    color: grey;
-    font-weight: 300;
-}
-
-.start {
-    padding-top: 15rem;
-    padding-bottom: 3rem;
-    text-align: center;
+.contact__data {
+    max-width: 400px;
     display: flex;
     flex-direction: column;
-    margin: auto;
+    gap: 4rem
 }
 
-.start__title {
-    font-size: var(--biggest-font-size);
-    margin: .75rem 0;
+.contact__title {
+    font-size: 24px;
+    color: var(--text-color)
 }
 
-.button-start {
-    width: 100px;
-    margin: auto;
+.contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+}
+
+Textarea {
+    max-height: 300px;
 }
 
 /*=============== BREAKPOINTS ===============*/

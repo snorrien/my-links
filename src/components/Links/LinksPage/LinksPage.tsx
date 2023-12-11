@@ -120,7 +120,7 @@ function LinksPage() {
                         + Add new link
                     </button>
 
-                    <div className="cards-grid" >
+                    <div className={filteredCards.length >= 5 ? "big-cards-grid" : "small-cards-grid"} >
                         {filteredCards.map((link, index) => (
                             <div key={link.id}
                                 className={`draggable ${getCardClass(link.id)}`}

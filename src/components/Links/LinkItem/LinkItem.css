@@ -8,6 +8,7 @@
   border-radius: 30px;
   transition: 0.2s ease-in-out;
   cursor: grab;
+  box-shadow: 0 2px 4px rgba(14,30,37,.12);
 }
 .linkItem:active {
   cursor: grabbing;
@@ -15,7 +16,9 @@
 }
 
 .linkItem:hover {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transform: translateY(-3px);
+  box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+
 }
 
 .linkItem_image{

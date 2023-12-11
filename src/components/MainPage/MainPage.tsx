@@ -1,6 +1,15 @@
 import "./MainPage.css";
+import Input from "../Shared/Input/Input";
+import Button from "../Shared/Button/Button";
+import Dropdown from "../Shared/Dropdown/Dropdown";
+import Textarea from "../Shared/Textarea/Textarea";
+import { useState } from "react";
+
 const MainPage = () => {
 
+    const [name, setName] = useState('');
+    const [nameError, setNameError] = useState<string | undefined>(undefined);
+    
     return (
         <div className="main-page">
             <section className="home">
@@ -27,15 +36,15 @@ const MainPage = () => {
                     <div className="about__list">
                         <div className="about__list-scroll" >
                             <div className="about__list-li">
-                                <p >save</p>
-                                <p >EASY</p>
-                                <p >FREE</p>
+                                <p>save</p>
+                                <p>EASY</p>
+                                <p>FREE</p>
                                 <p>FUNNY</p>
                                 <p>QUICK</p>
                                 <p>allow</p>
-                                <p >save</p>
-                                <p >EASY</p>
-                                <p >FREE</p>
+                                <p>save</p>
+                                <p>EASY</p>
+                                <p>FREE</p>
                                 <p>FUNNY</p>
                                 <p>QUICK</p>
                                 <p>allow</p>
@@ -51,17 +60,27 @@ const MainPage = () => {
                         <div className="description-element">
                             <div className="description-inner">
                                 <div className="description-front">
-                                    <p className="description-title">Save</p>
+                                    <p className="description-title">Free</p>
                                 </div>
                                 <div className="description-back">
-                                    <p className="description-title">Save</p>
-                                    <p>Say goodbye to cluttered browser
-                                        bookmarks and scattered links across multiple devices. No more worrying about losing your links when switching devices.</p>
+                                    <p className="description-title">Free</p>
+                                    <p>It's absolutely free. Use it for your personally needs.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="description-element">
-
+                            <div className="description-inner">
+                                <div className="description-front">
+                                    <p className="description-title">Save</p>
+                                </div>
+                                <div className="description-back">
+                                    <p className="description-title">Save</p>
+                                    <p>No more worrying about losing your links. Say goodbye to cluttered browser
+                                         bookmarks and scattered links across multiple devices. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="description-element">
                             <div className="description-inner">
                                 <div className="description-front">
                                     <p className="description-title">Organize</p>
@@ -69,36 +88,45 @@ const MainPage = () => {
                                 <div className="description-back">
                                     <p className="description-title"> Organize</p>
                                     <p>Organize and categorize web links with just a few clicks.
-                                        Intuitive interface for quick and easy link entry and retrieval.
                                         Assign tags and descriptions to links for enhanced searchability.</p>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                        <div className="description__me">
-                            <p>Hi!</p>
-                            <p>In this site I tried to implement the functionality that I personally needed.
-                                If there isn't something that satisfies my needs, I'll just do it.
-                                That's how this project came about.</p>
-                            <div className="me__author">
-                                <img className="author-image" src="imgs/author.jpg" />
-                                <div className="author-data">
-                                    <p className="author-name">Alena Shapovalova</p>
-                                    <p className="author-profession">Frontend Developer</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             </section >
-            <section className="start">
-                <h1 className="start__title">Ready to try MyLinks?</h1>
-                <button className="button-start">Start</button>
+            <section className="contact">
+            <div className="contact-page">
+            <div className="contact__data">
+                <div>
+                    <p className="contact__title">Problems</p>
+                    <p>If you find any problems in using site, please write me your message.
+                        It needs for making my sitee better and your using nore confortable</p>
+                </div>
+                <div>
+                    <p className="contact__title">Ideas and Suggestions</p>
+                    <p>I open to suggestions. Let`s invent and create something new togeher </p>
+                </div>
+            </div>
+            <div className="contact__form">
+                <Input
+                    label='Name'
+                    placeholder="Name"
+                    onChange={setName}
+                    error={nameError}
+                    type="name"
+                    autoComplete="username"
+                />
+                <Dropdown items={["Problems", "Ideas and Suggestions"]} />
+
+               <Textarea/>
+                <Button text={"Send"} onClick={undefined} />
+
+            </div >
+
+        </div >
+    )
             </section>
 
         </div >
