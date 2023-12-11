@@ -60,9 +60,6 @@ const Navigation: React.FC = () => {
           MYLINKS
         </a>
         <div className="navigation__list">
-          <div className="list-item">
-            <a href="/contact" className="nav__link">Contact</a>
-          </div>
           {!isSignOut ?
             (
               <div className="navigation__list">
