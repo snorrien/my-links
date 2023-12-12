@@ -48,7 +48,7 @@ function Folders({ clickFolderList, openFolder }: Props) {
                 <button onClick={handleClick}>Add folder</button>
                 {filteredFolders.map((folder) => (
                     <div key={folder.id}>
-                        <FolderItem folder={folder} openFolder={openFolder} />
+                        <FolderItem folder={folder} openFolder={openFolder}/>
                     </div>
                 ))}
             </div>

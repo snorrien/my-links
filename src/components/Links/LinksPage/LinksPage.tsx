@@ -81,7 +81,7 @@ function LinksPage() {
     };
 
     const onSortingChange = async (selectedOption: string) => {
-        if (selectedOption === 'byTitle') {
+        if (selectedOption === 'by Title') {
             setSorting('title');
         } else {
             setSorting(undefined);
@@ -93,8 +93,6 @@ function LinksPage() {
     }
 
     function openFolder(folderId: string) {
-        console.log(folderId);
-
         setFolderId(folderId);
     }
 

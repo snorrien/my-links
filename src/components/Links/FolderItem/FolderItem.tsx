@@ -1,15 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FolderModel } from "../../../Models/FolderModel";
-import { useDrag, useDrop } from "react-dnd";
+import { LinkModel } from "../../../Models/LinkModel";
+import { useDrop } from "react-dnd";
 
+import "./FolderItem.css";
+import { getLinksCount } from "../../../Firebase/Link/getLinksCount";
+import { getAuth } from "firebase/auth";
 
 type Props = {
     folder: FolderModel,
-    openFolder: any
+    openFolder: any;
 };
 
 function FolderItem({ folder, openFolder }: Props) {
-    const [numberOfCards, setNumberOfCards] = useState(0);
+    const [linksCount, setLinksCount] = useState(0);
+
+    useEffect(() => {
+        getAuth().onAuthStateChanged(() => {
+            fetchLinksCount();
+        })
+
+    }, []);
+
+    const fetchLinksCount = async () => {
+        const count = await getLinksCount(folder.id);
+        setLinksCount(count);
+    };
 
     function handleClickFolder() {
         openFolder(folder.id);
@@ -24,9 +40,12 @@ function FolderItem({ folder, openFolder }: Props) {
         }),
     }))
 
+
+
+
     return (
         <div ref={drop} key={folder.id} className="folders_list-item" onClick={handleClickFolder}>{folder.title}
-            <span className="folders_list-number">{numberOfCards}</span>
+            <span className="folders_list-number">{linksCount}</span>
         </div>
     );
 }
