@@ -13,8 +13,9 @@
 
 .dropdown__label {
     line-height: normal;
-    font-weight: 700;
+    font-weight: 600;
     position: relative;
+    font-size: 14px;
 }
 
 .dropdown__arrow {
@@ -48,14 +49,13 @@
 
 .dropdown__item {
     padding: 3px 3px 3px 10px ;
-
+    font-size: 14px;
     text-align: start;
 
 }
 
 .dropdown__item:hover {
-    background: royalblue;
-    color: var(--common-color);
+    background: rgb(240, 241, 245);
 }
 
 .dropdown__items-hidden {

@@ -1,12 +1,12 @@
 button {
     font-family: inherit;
     font-size: 16px;
-    background: royalblue;
+    background-color: var(--text-color);
     color: white;
     padding: .5em 1em;
     padding-left: 0.9em;
     text-align: center;
-    border: 2px solid royalblue;
+    border: 2px solid  var(--text-color);
     border-radius: 10px;
     overflow: hidden;
     transition: all 0.2s;
@@ -14,11 +14,11 @@ button {
 
   button:hover {
     cursor: pointer;
-    background: rgb(39, 73, 175);
-    border: 2px solid rgb(39, 73, 175);
+    background: rgb(84, 44, 104);
+    border: 2px solid rgb(94, 46, 118);
   }
   
   button:active{
-    background: rgb(34, 62, 146);
-    border: 2px solid rgb(34, 62, 146);
+    background: rgb(84, 44, 104);
+    border: 2px solid rgb(94, 46, 118);
   }

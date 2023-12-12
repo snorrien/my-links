@@ -99,20 +99,21 @@ const MainPage = () => {
                 </div>
             </section >
             <section className="contact">
-                <div  className="contact__color-container"></div>
                 <h1 className="contact__title__title">Contact us</h1>
+                <div className="contact__color-container"></div>
+                <div className="contact__black-container"></div>
+                <div className="circle-back circle-1"></div>
+                <div className="circle-front"></div>
+                <div className="circle-back circle-2"></div>
                 <div className="contact__container">
-
-
-                    <div className="contact__data">
+                    <div className="contact__text">
                         <div>
                             <p className="contact__title">Problems</p>
-                            <p>If you find any problems in using site, please write me your message.
-                                It needs for making my sitee better and your using nore confortable</p>
+                            <p>If you find any problems in using site, please write us your message.</p>
                         </div>
                         <div>
                             <p className="contact__title">Ideas and Suggestions</p>
-                            <p>I open to suggestions. Let`s invent and create something new togeher </p>
+                            <p>We open to suggestions. Let`s invent and create something new togeher </p>
                         </div>
                     </div>
                     <div className="contact__form">
@@ -125,10 +126,8 @@ const MainPage = () => {
                             autoComplete="username"
                         />
                         <Dropdown items={["Problems", "Ideas and Suggestions"]} />
-
                         <Textarea />
                         <Button text={"Send"} onClick={undefined} />
-
                     </div>
                 </div>
             </section>

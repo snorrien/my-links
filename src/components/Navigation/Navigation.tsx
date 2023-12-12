@@ -63,7 +63,7 @@ const Navigation: React.FC = () => {
           {!isSignOut ?
             (
               <div className="navigation__list">
-                <button className='white-button navigation__button' onClick={() => handleLoginClick()}>Log in</button>
+                <button className='login-button navigation__button' onClick={() => handleLoginClick()}>Log in</button>
                 <button className='navigation__button' onClick={() => handleRegisterClick()}>Sign up</button>
               </div>
             ) :
