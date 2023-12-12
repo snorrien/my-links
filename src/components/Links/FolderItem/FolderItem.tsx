@@ -42,10 +42,9 @@ function FolderItem({ folder, openFolder }: Props) {
 
 
 
-
     return (
-        <div ref={drop} key={folder.id} className="folders_list-item" onClick={handleClickFolder}>{folder.title}
-            <span className="folders_list-number">{linksCount}</span>
+        <div ref={drop} key={folder.id} className="folder-item" onClick={handleClickFolder}>{folder.title}
+            <span className="folder-item__number">{linksCount}</span>
         </div>
     );
 }

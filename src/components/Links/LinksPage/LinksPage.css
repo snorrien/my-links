@@ -27,6 +27,12 @@
 }
 
 /*==============SEARCH=============*/
+
+.card__page-title{
+  font-size: 24px;
+  font-weight: 600;
+}
+
 .nav__search {
   background-color: white;
   border: none;

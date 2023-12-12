@@ -1,16 +1,16 @@
-.folders_list-item {
+.folder-item {
     padding: 10px 4px;
     border-radius: 5px;
     border: 2px solid white;
     position: relative;
 }
 
-.folders_list-item:hover {
-    cursor: pointer;
+.folder-item:hover {
     border: 2px solid rgb(94, 46, 118);
+    cursor: pointer;
 }
 
-.folders_list-number {
+.folder-item__number {
     position: absolute;
     right: 10px;
     top: 30%;

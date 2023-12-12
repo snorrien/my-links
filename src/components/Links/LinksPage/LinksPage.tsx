@@ -104,7 +104,6 @@ function LinksPage() {
         <div className='card__page'>
             <DndProvider backend={HTML5Backend}>
                 <Folders clickFolderList={clickFolderList} openFolder={openFolder} />
-
                 <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
                     <div className="nav__search">
                         <div className="search">

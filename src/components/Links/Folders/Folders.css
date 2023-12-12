@@ -7,14 +7,65 @@
     position: fixed;
 }
 
-.folders_list {
+.folders__list {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
     padding: 5rem .5rem .5rem;
     height: 100%;
-    overflow-y: scroll;
-    box-sizing: content-box;
+}
+
+.folders__list-item {
+    padding: 10px 4px;
+    border-radius: 5px;
+    border: 2px solid white;
+    position: relative;
+}
+
+.folders__list-item:hover {
+    border: 2px solid rgb(94, 46, 118);
+    cursor: pointer;
+}
+
+.folders__items-highlight{
+background-color: rgb(244, 241, 246);
+}
+
+
+.folders__list-button {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.add-folder-button-svg {
+    width: 20px;
+    height: 20px;
+}
+
+.add-folder-button {
+    margin-right: 7px;
+    padding: 2px;
+    border-radius: 5px;
+    display: flex;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+}
+
+.add-folder-button:hover path {
+    fill: white;
+}
+
+.add-folder-button:hover {
+    cursor: pointer;
+    background-color: rgba(173, 184, 194, 1);
+}
+
+.folders__items-hidden {
+    display: none;
+}
+
+.folders__items {
+    display: block
 }
 
 .move-left {
