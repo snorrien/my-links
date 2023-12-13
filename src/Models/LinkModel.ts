@@ -12,3 +12,11 @@ export class UpdateLinkModel {
   public description: string = "";
   public folderId: string = "";
 }
+
+export type LinkType = {
+  id: number,
+  title: string,
+  description: string,
+  date: string,
+  folderId: string
+}

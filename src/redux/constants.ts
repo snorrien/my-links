@@ -1,0 +1,5 @@
+export const GET_ALL_LINKS = "GET_ALL_LINKS";
+export const SET_ALL_LINKS = "SET_ALL_LINKS";
+export const GET_LINKS_LOADED = "GET_LINKS_LOADED";
+export const GET_LINKS_REQUEST = "GET_LINKS_REQUEST";
+

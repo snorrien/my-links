@@ -13,6 +13,10 @@ import Dropdown from "../../Shared/Dropdown/Dropdown";
 import { getAuth } from "firebase/auth";
 import { useDrop, DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getAllLinks } from "../../../redux/actions/actionCreator";
+import { RootState } from "../../../store";
 
 
 function LinksPage() {
@@ -25,6 +29,11 @@ function LinksPage() {
     const [sorting, setSorting] = useState<string>();
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
     const [folderId, setFolderId] = useState<string | undefined>();
+
+
+    const AllLinks: LinkModel[] = useSelector(
+        (state: RootState) => state.links
+    );
 
     useEffect(() => {
         getAuth().onAuthStateChanged(() => {
@@ -107,7 +116,7 @@ function LinksPage() {
                 <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
                     <div className="nav__search">
                         <div className="search">
-                            <Dropdown
+                            <Dropdown 
                                 items={["by Date", "by Title"]}
                                 onChange={onSortingChange} />
                             <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
@@ -116,7 +125,6 @@ function LinksPage() {
                     <button onClick={handleAddClick} className="add-link-button">
                         + Add new link
                     </button>
-
                     <div className={filteredCards.length >= 5 ? "big-cards-grid" : "small-cards-grid"} >
                         {filteredCards.map((link, index) => (
                             <div key={link.id}

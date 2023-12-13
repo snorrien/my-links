@@ -5,6 +5,8 @@ import { addFolder } from '../../../Firebase/folders/addFolder';
 import { getFolders } from '../../../Firebase/folders/getFolders';
 import { getAuth } from 'firebase/auth';
 import FolderItem from '../FolderItem/FolderItem';
+import { getAllLinks } from '../../../redux/actions/actionCreator';
+import { useDispatch, useSelector } from 'react-redux';
 
 type Props = {
     clickFolderList: any;
@@ -42,6 +44,12 @@ function Folders({ clickFolderList, openFolder }: Props) {
         setListOfFolders(!listOfFolders);
     }
 
+    const dispatch = useDispatch();
+
+    const showAllLinks = () => {
+        dispatch(getAllLinks());
+    };
+
 
     return (
         <div className={`folders__wrapper ${isArrow ? 'move-left' : ''}`}>
@@ -50,7 +58,7 @@ function Folders({ clickFolderList, openFolder }: Props) {
                 <div className={`arrow arrow-two ${isArrow ? 'left-two' : ''}`} ></div>
             </div>
             <div className='folders__list' >
-                <div className={`folders__list-item ${listOfFolders ? '' : 'folders__items-highlight'}`}>All links</div>
+                <div className={`folders__list-item ${listOfFolders ? '' : 'folders__items-highlight'}`} onClick={showAllLinks}>All links</div>
                 <div className={`folders__list-item folders__list-button ${listOfFolders ? 'folders__items-highlight' : ''}`} title="Add new folder" onClick={showListOfFolders}>
                     <p>Folders</p>
                     <div className='add-folder-button' onClick={handleClick}>
@@ -70,3 +78,7 @@ function Folders({ clickFolderList, openFolder }: Props) {
 }
 
 export default Folders;
+function dispatch(arg0: any) {
+    throw new Error('Function not implemented.');
+}
+

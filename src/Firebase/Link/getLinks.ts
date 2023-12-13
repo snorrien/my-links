@@ -8,12 +8,11 @@ export async function getLinks(search?: string, sorting: string = "createDate", 
     if (!userId) {
         return [];
     }
-
     const cardsRef = collection(db, "cards");
 
     let getCardsQuery = query(cardsRef, where("userId", "in", [userId]), orderBy(sorting));
     
-    if (search && !folderId!) {
+    if (search && !folderId) {
         getCardsQuery = query(cardsRef, where("title", "in", [search]), where("userId", "in", [userId]), orderBy(sorting));
     }
 
@@ -37,5 +36,6 @@ export async function getLinks(search?: string, sorting: string = "createDate", 
             folderId: doc.data().folderId
         });
     });
+    console.log(cards)
     return cards;
 }
