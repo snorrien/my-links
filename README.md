@@ -4,8 +4,9 @@ It is app for saving web links. Here you can create card with link and title, ed
 # Link
 https://master--mylink2411saving.netlify.app/
 
-![Screenshot 2023-12-14 103515](https://github.com/snorrien/my-links/assets/120132990/90365be1-b99b-4842-8ad4-c9793738816c)
-![Screenshot 2023-12-14 105257](https://github.com/snorrien/my-links/assets/120132990/bd028659-2f6c-451f-8014-7037bca66a33)
+![Screenshot 2023-12-14 110751](https://github.com/snorrien/my-links/assets/120132990/2a20dca9-f959-4604-9926-39245c117e5e)
+
+![Screenshot 2023-12-14 110727](https://github.com/snorrien/my-links/assets/120132990/73bd4caf-7fe7-434f-88a5-0408038cd6f7)
 
 # Functional
 1. Modals "Sign In" and "Sign up" with Firebase authentication.
