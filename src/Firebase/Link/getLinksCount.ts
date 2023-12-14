@@ -1,6 +1,5 @@
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../firebase";
-import { LinkModel } from "../../Models/LinkModel";
 import { getAuth } from "firebase/auth";
 
 export async function getLinksCount(folderId?: string): Promise<number> {

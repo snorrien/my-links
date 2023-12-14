@@ -5,7 +5,7 @@ import { addFolder } from '../../../Firebase/folders/addFolder';
 import { getFolders } from '../../../Firebase/folders/getFolders';
 import { getAuth } from 'firebase/auth';
 import FolderItem from '../FolderItem/FolderItem';
-import { getAllLinks } from '../../../redux/actions/actionCreator';
+import { getAllLinks, setFolderId } from '../../../redux/actions/actionCreator';
 import { useDispatch, useSelector } from 'react-redux';
 
 type Props = {
@@ -47,7 +47,7 @@ function Folders({ clickFolderList, openFolder }: Props) {
     const dispatch = useDispatch();
 
     const showAllLinks = () => {
-        dispatch(getAllLinks());
+        dispatch(setFolderId(undefined));
     };
 
 

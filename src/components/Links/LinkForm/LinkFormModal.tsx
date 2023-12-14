@@ -1,17 +1,16 @@
 import { ChangeEvent, useState } from "react";
-import { LinkModel } from "../../../Models/LinkModel";
 import "./LinkFormModal.css";
 import { updateLink } from "../../../Firebase/Link/updateLink";
 import Modal from "../../Shared/Modal/Modal";
+import { LinkType } from "../../../Models/LinkType";
 
 type Props = {
-    card: LinkModel;
+    card: LinkType;
     isOpen: boolean,
     closeModal: any;
-    fetchCards: any;
 }
 
-const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal, fetchCards }) => {
+const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal }) => {
     const [title, setTitle] = useState(card.title);
     const [description, setDescription] = useState(card.description);
 
@@ -31,7 +30,6 @@ const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal, fetchCards }
             folderId: card.folderId
         });
 
-        await fetchCards();
         closeModal();
     }
 

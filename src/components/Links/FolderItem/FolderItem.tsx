@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FolderModel } from "../../../Models/FolderModel";
-import { LinkModel } from "../../../Models/LinkModel";
 import { useDrop } from "react-dnd";
 
 import "./FolderItem.css";
@@ -10,6 +9,7 @@ import { getAuth } from "firebase/auth";
 type Props = {
     folder: FolderModel,
     openFolder: any;
+    
 };
 
 function FolderItem({ folder, openFolder }: Props) {
@@ -19,7 +19,6 @@ function FolderItem({ folder, openFolder }: Props) {
         getAuth().onAuthStateChanged(() => {
             fetchLinksCount();
         })
-
     }, []);
 
     const fetchLinksCount = async () => {
@@ -39,8 +38,6 @@ function FolderItem({ folder, openFolder }: Props) {
             canDrop: monitor.canDrop(),
         }),
     }))
-
-
 
     return (
         <div ref={drop} key={folder.id} className="folder-item" onClick={handleClickFolder}>{folder.title}
