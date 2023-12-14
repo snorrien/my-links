@@ -25,8 +25,10 @@ function Folders({ clickFolderList }: Props) {
 
     const handleClick = async (event: any) => {
         event.preventDefault();
+        event.stopPropagation();
         await addFolder();
-        dispatch(getFolders());
+        await dispatch(getFolders());
+        
     };
 
     useEffect(() => {
@@ -48,6 +50,8 @@ function Folders({ clickFolderList }: Props) {
         dispatch(setFolderId(undefined));
     };
 
+
+
     return (
         <div className={`folders__wrapper ${isArrow ? 'move-left' : ''}`}>
             <div className="arrows-button" onClick={toggleArrow}>
@@ -55,10 +59,10 @@ function Folders({ clickFolderList }: Props) {
                 <div className={`arrow arrow-two ${isArrow ? 'left-two' : ''}`} ></div>
             </div>
             <div className='folders__list' >
-                <div className={`folders__list-item ${listOfFolders ? '' : 'folders__items-highlight'}`} onClick={showAllLinks}>All links</div>
-                <div className={`folders__list-item folders__list-button ${listOfFolders ? 'folders__items-highlight' : ''}`} title="Add new folder" onClick={showListOfFolders}>
+                <div className={`folders__list-item `} onClick={showAllLinks}>All links</div>
+                <div className={`folders__list-item folders__list-button`} title="Add new folder" onClick={showListOfFolders} >
                     <p>Folders</p>
-                    <div className='add-folder-button' onClick={handleClick}>
+                    <div className='add-folder-button' onClick={(event) => { handleClick(event) }}>
                         <svg className='add-folder-button-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z" fill="rgba(173,184,194,1)"></path></svg>
                     </div>
                 </div>
