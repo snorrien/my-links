@@ -5,9 +5,7 @@ export async function register(email: string, password: string) {
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, email, password)
         .then(result => {
-            console.log(result.user.uid)
         })
         .catch((error) => {
-            console.log(error.message);
         });
 }

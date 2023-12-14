@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import { saveLink } from '../../../Firebase/Link/addLink';
 import { getAuth } from "firebase/auth";
-import { getAllLinks, setFolderId, setSearch, setSorting } from "../../../redux/actions/actionCreator";
+import { getAllLinks, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
 import { RootState } from "../../../store";
 import { LinkSortField } from "../../../Enums/LinkSortField";
 import { LinkType } from "../../../Models/LinkType";
@@ -90,10 +90,6 @@ function LinksPage() {
         setIsShowFolderList((prevIsShowFolderList) => !prevIsShowFolderList);
     }
 
-    function openFolder(folderId: string) {
-        dispatch(setFolderId(folderId))
-    }
-
     function getCardClass(cardId: string): string | undefined {
         return removedCardId === cardId ? 'deleteAnimation' : '';
     }
@@ -105,7 +101,7 @@ function LinksPage() {
     return (
         <div className='card__page'>
             <DndProvider backend={HTML5Backend}>
-                <Folders clickFolderList={clickFolderList} openFolder={openFolder} />
+                <Folders clickFolderList={clickFolderList} />
                 <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
                     <div className='card__page-title'>
                         <p> All links</p>

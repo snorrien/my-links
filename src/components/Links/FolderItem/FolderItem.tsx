@@ -1,47 +1,34 @@
-import { useEffect, useState } from "react";
-import { FolderModel } from "../../../Models/FolderModel";
+import { FolderType } from "../../../Models/FolderType";
 import { useDrop } from "react-dnd";
-
 import "./FolderItem.css";
-import { getLinksCount } from "../../../Firebase/Link/getLinksCount";
-import { getAuth } from "firebase/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { setFolderId } from "../../../redux/actions/LinkActionCreator";
 
 type Props = {
-    folder: FolderModel,
-    openFolder: any;
-    
+    folder: FolderType,
 };
 
-function FolderItem({ folder, openFolder }: Props) {
-    const [linksCount, setLinksCount] = useState(0);
-
-    useEffect(() => {
-        getAuth().onAuthStateChanged(() => {
-            fetchLinksCount();
-        })
-    }, []);
-
-    const fetchLinksCount = async () => {
-        const count = await getLinksCount(folder.id);
-        setLinksCount(count);
-    };
+function FolderItem({ folder }: Props) {
+    const dispatch = useDispatch();
 
     function handleClickFolder() {
-        openFolder(folder.id);
+        dispatch(setFolderId(folder.id));
     }
 
     const [{ canDrop, isOver }, drop] = useDrop(() => ({
         accept: 'link',
-        drop: () => ({ id: folder.id }),
+        drop: () => (
+            { id: folder.id }
+        ),
         collect: (monitor) => ({
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop(),
-        }),
+        })
     }))
 
     return (
         <div ref={drop} key={folder.id} className="folder-item" onClick={handleClickFolder}>{folder.title}
-            <span className="folder-item__number">{linksCount}</span>
+            <span className="folder-item__number">{folder.linksCount}</span>
         </div>
     );
 }

@@ -12,6 +12,11 @@
     flex-direction: column;
     padding: 5rem .5rem .5rem;
     height: 100%;
+    overflow: auto;
+}
+
+.folders__list::-webkit-scrollbar {
+    display: none;
 }
 
 .folders__list-item {

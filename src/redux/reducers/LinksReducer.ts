@@ -1,6 +1,8 @@
 import { LinkSortField } from "../../Enums/LinkSortField";
 import { LinkType } from "../../Models/LinkType";
 import { SET_ALL_LINKS, GET_LINKS_REQUEST, GET_LINKS_LOADED, SET_LINKS, SET_FOLDER_ID, SET_SEARCH, SET_SORTING, UPDATE_LINKS } from "../constants";
+import {produce} from "immer"
+
 
 interface LinksState {
     allLinks: LinkType[],
@@ -30,7 +32,6 @@ const filterLinks = (allLinks: LinkType[], search: string, folderId?: string, so
     }
 
     if (sortField === LinkSortField.title) {
-
         links = links.sort((a, b) => a.title.localeCompare(b.title))
     } else {
         links = links.sort((a, b) => a.createDate < b.createDate ? -1 : 1)
@@ -47,21 +48,15 @@ const linksReducer = (state: LinksState = initialState, action: any) => {
                 ...state,
                 allLinks: action.allLinks
             }
-        case SET_LINKS:
-            return {
-                ...state,
-                links: action.links
-            }
         case SET_FOLDER_ID:
             return {
                 ...state,
                 folderId: action.folderId
             }
         case SET_SEARCH:
-            return {
-                ...state,
-                search: action.search
-            }
+            return produce(state, draftState => {
+                draftState.search = action.search
+            })
         case SET_SORTING:
             return {
                 ...state,

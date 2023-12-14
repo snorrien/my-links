@@ -1,7 +1,8 @@
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../firebase";
-import { FolderModel } from "../../Models/FolderModel";
+import { FolderType } from "../../Models/FolderType";
 import { getAuth } from "firebase/auth";
+import { getLinksCount } from "../Link/getLinksCount";
 
 export async function getFolders() {
     const userId = getAuth().currentUser?.uid;
@@ -13,12 +14,14 @@ export async function getFolders() {
     let getFoldersQuery = query(foldersRef, where("userId", "in", [userId]));
     const querySnapshot = await getDocs(getFoldersQuery);
 
-    const folders: FolderModel[] = [];
-    querySnapshot.forEach((doc) => {
-        folders.push({
+    const promises = querySnapshot.docs.map(async (doc) => {
+        const folder = {
             id: doc.id,
-            title: doc.data().title
-        });
+            title: doc.data().title,
+            linksCount: await getLinksCount(doc.id)
+        };
+        return folder;
     });
-    return folders;
+
+    return await Promise.all(promises);
 }

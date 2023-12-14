@@ -23,6 +23,5 @@ export async function getLinks(): Promise<LinkType[]> {
             folderId: doc.data().folderId
         });
     });
-    console.log(cards)
     return cards;
 }

@@ -1,39 +1,39 @@
 import { useEffect, useState } from 'react';
 import './Folders.css'
-import { FolderModel } from '../../../Models/FolderModel';
+import { FolderType } from '../../../Models/FolderType';
 import { addFolder } from '../../../Firebase/folders/addFolder';
-import { getFolders } from '../../../Firebase/folders/getFolders';
 import { getAuth } from 'firebase/auth';
 import FolderItem from '../FolderItem/FolderItem';
-import { getAllLinks, setFolderId } from '../../../redux/actions/actionCreator';
+import { getAllLinks, getFolders, setFolderId } from '../../../redux/actions/LinkActionCreator';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 type Props = {
     clickFolderList: any;
-    openFolder: any;
 };
 
-function Folders({ clickFolderList, openFolder }: Props) {
-    const [filteredFolders, setFilteredFolders] = useState<FolderModel[]>([]);
+function Folders({ clickFolderList }: Props) {
     const [isArrow, setIsArrow] = useState(true);
     const [listOfFolders, setListOfFolders] = useState(false);
+
+    const folders: FolderType[] = useSelector(
+        (state: RootState) => state.folders.folders
+    );
+
+
+    const dispatch = useDispatch();
 
     const handleClick = async (event: any) => {
         event.preventDefault();
         await addFolder();
-        await fetchFolders();
+        dispatch(getFolders());
     };
 
     useEffect(() => {
         getAuth().onAuthStateChanged(() => {
-            fetchFolders();
+            dispatch(getFolders());
         });
     }, []);
-
-    const fetchFolders = async () => {
-        const folders = await getFolders();
-        setFilteredFolders(folders);
-    };
 
     const toggleArrow = () => {
         setIsArrow((prevIsArrow) => !prevIsArrow);
@@ -44,12 +44,9 @@ function Folders({ clickFolderList, openFolder }: Props) {
         setListOfFolders(!listOfFolders);
     }
 
-    const dispatch = useDispatch();
-
     const showAllLinks = () => {
         dispatch(setFolderId(undefined));
     };
-
 
     return (
         <div className={`folders__wrapper ${isArrow ? 'move-left' : ''}`}>
@@ -66,9 +63,9 @@ function Folders({ clickFolderList, openFolder }: Props) {
                     </div>
                 </div>
                 <div className={` ${listOfFolders ? 'folders__items' : 'folders__items-hidden'}`}>
-                    {filteredFolders.map((folder) => (
+                    {folders.map((folder) => (
                         <div key={folder.id}>
-                            <FolderItem folder={folder} openFolder={openFolder} />
+                            <FolderItem folder={folder} />
                         </div>
                     ))}
                 </div>
@@ -78,7 +75,3 @@ function Folders({ clickFolderList, openFolder }: Props) {
 }
 
 export default Folders;
-function dispatch(arg0: any) {
-    throw new Error('Function not implemented.');
-}
-

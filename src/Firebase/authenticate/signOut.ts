@@ -4,6 +4,5 @@ export async function userSignOut() {
     const auth = getAuth();
     await signOut(auth)
         .then(() => {
-            console.log('sign out')
       })
 }
