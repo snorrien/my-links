@@ -28,14 +28,24 @@
 
 /*==============SEARCH=============*/
 
-.card__page-title{
+.card__page-title input {
   font-size: 24px;
   font-weight: 600;
   display: flex;
-  gap:1rem
+  gap: 1rem;
+  border: none;
+  background-color: white;
 }
 
-.card__page-title svg{
+
+
+
+.card__page-title input:focus {
+  border: none;
+  outline: none;
+}
+
+.card__page-title svg {
   height: 24px;
   width: 24px;
 }
@@ -55,7 +65,7 @@
   align-items: center;
   justify-content: space-between;
   width: 400px;
-  }
+}
 
 .search__input {
   width: 100%;

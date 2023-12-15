@@ -11,10 +11,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import { saveLink } from '../../../Firebase/Link/addLink';
 import { getAuth } from "firebase/auth";
-import { getAllLinks, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
+import { getAllLinks, getFolders, setFolder, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
 import { RootState } from "../../../store";
 import { LinkSortField } from "../../../Enums/LinkSortField";
 import { LinkType } from "../../../Models/LinkType";
+import { updateFolder } from "../../../Firebase/folders/updateFolder";
+import { FolderType } from "../../../Models/FolderType";
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
@@ -22,13 +24,15 @@ function LinksPage() {
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [confirmationDialog, setConfirmationDialog] = useState(false);
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
+    const [editingFolderTitle, setEditingFolderTitle] = useState(false);
+
 
     const links: LinkType[] = useSelector(
         (state: RootState) => state.links.links
     );
 
-    const folderId: string = useSelector(
-        (state: RootState) => state.links.folderId
+    const folder: FolderType = useSelector(
+        (state: RootState) => state.links.folder
     );
 
     const dispatch = useDispatch();
@@ -41,7 +45,7 @@ function LinksPage() {
 
     const handleAddClick = async (event: any) => {
         event.preventDefault();
-        await saveLink(folderId);
+        await saveLink(folder?.id);
         dispatch(getAllLinks())
     };
 
@@ -94,9 +98,23 @@ function LinksPage() {
         return removedCardId === cardId ? 'deleteAnimation' : '';
     }
 
-    const handleEditFolder = () => {
-
+    const handleInputChange = (event: any) => {
+        dispatch(setFolder({
+            id: folder.id,
+            title: event.target.value,
+            linksCount: folder.linksCount
+        }));
     };
+
+    const handleInputBlur = async () => {
+        if (folder) {
+            await updateFolder({
+                id: folder.id,
+                title: folder.title,
+            })
+            dispatch(getFolders())
+        }
+    }
 
     return (
         <div className='card__page'>
@@ -104,8 +122,16 @@ function LinksPage() {
                 <Folders clickFolderList={clickFolderList} />
                 <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
                     <div className='card__page-title'>
-                        <p> All links</p>
-                        <svg onClick={() => handleEditFolder()} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="rgba(173,184,194,1)"></path></svg>
+                        <input
+                            type="text"
+                            required
+                            disabled={!folder}
+                            placeholder={folder?.title === '' ? 'Untitled' : folder?.title}
+                            value={folder?.title ?? 'All Links'}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
+                        />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="rgba(173,184,194,1)"></path></svg>
                     </div>
 
                     <div className="nav__search">

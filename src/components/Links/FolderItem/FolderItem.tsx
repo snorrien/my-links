@@ -2,7 +2,7 @@ import { FolderType } from "../../../Models/FolderType";
 import { useDrop } from "react-dnd";
 import "./FolderItem.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { setFolderId } from "../../../redux/actions/LinkActionCreator";
+import { setFolder } from "../../../redux/actions/LinkActionCreator";
 
 type Props = {
     folder: FolderType,
@@ -12,7 +12,7 @@ function FolderItem({ folder }: Props) {
     const dispatch = useDispatch();
 
     function handleClickFolder() {
-        dispatch(setFolderId(folder.id));
+        dispatch(setFolder(folder));
     }
 
     const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -27,7 +27,7 @@ function FolderItem({ folder }: Props) {
     }))
 
     return (
-        <div ref={drop} key={folder.id} className="folder-item" onClick={handleClickFolder}>{folder.title}
+        <div ref={drop} key={folder.id} className="folder-item" onClick={handleClickFolder}>{folder.title === '' ? 'Untitled' : folder.title}
             <span className="folder-item__number">{folder.linksCount}</span>
         </div>
     );

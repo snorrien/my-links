@@ -1,5 +1,5 @@
 import { call, put, takeEvery} from "redux-saga/effects";
-import { GET_ALL_LINKS, GET_FOLDERS, SET_FOLDER_ID, SET_SEARCH, SET_SORTING } from "../constants";
+import { GET_ALL_LINKS, GET_FOLDERS, SET_FOLDER,  SET_SEARCH, SET_SORTING } from "../constants";
 import { setAllLinks, setFolders, updateLinks } from "../actions/LinkActionCreator";
 import { getLinks } from "../../Firebase/Link/getLinks";
 import { LinkType } from "../../Models/LinkType";
@@ -27,6 +27,6 @@ export default function* rootSaga() {
     yield takeEvery(GET_ALL_LINKS, fetchAllLinks);
     yield takeEvery(SET_SORTING, callUpdateLinks);
     yield takeEvery(SET_SEARCH, callUpdateLinks);
-    yield takeEvery(SET_FOLDER_ID, callUpdateLinks);
+    yield takeEvery(SET_FOLDER, callUpdateLinks);
     yield takeEvery(GET_FOLDERS, fetchFolders);
 }

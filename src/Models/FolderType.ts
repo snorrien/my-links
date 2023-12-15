@@ -3,3 +3,8 @@ export type FolderType = {
   title: string,
   linksCount: number
 }
+
+export class UpdateFolderModel {
+  public id: string = "";
+  public title: string = "";
+}
