@@ -3,7 +3,7 @@ import "./LinkItem.css";
 import { useDrag } from "react-dnd";
 import { FolderType } from "../../../Models/FolderType";
 import { useDispatch } from 'react-redux';
-import { updateLink } from "../../../redux/actions/LinkActionCreator";
+import { moveLink, updateLink } from "../../../redux/actions/LinkActionCreator";
 
 type Props = {
     link: LinkType;
@@ -28,7 +28,7 @@ function LinkItem({ link, editCard, deleteCard }: Props) {
         end: (link, monitor) => {
             const dropResult = monitor.getDropResult<FolderType>()
             if (link && dropResult) {
-                dispatch(updateLink({
+                dispatch(moveLink({
                     id: link.id,
                     title: link.title,
                     description: link.description,

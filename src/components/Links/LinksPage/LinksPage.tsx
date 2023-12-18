@@ -25,6 +25,7 @@ function LinksPage() {
     const [confirmationDialog, setConfirmationDialog] = useState(false);
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
     const [editingFolderTitle, setEditingFolderTitle] = useState(false);
+    const dispatch = useDispatch();
 
     const links: LinkType[] = useSelector(
         (state: RootState) => state.links.links
@@ -33,8 +34,6 @@ function LinksPage() {
     const folder: FolderType = useSelector(
         (state: RootState) => state.links.folder
     );
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         getAuth().onAuthStateChanged(() => {
@@ -51,7 +50,6 @@ function LinksPage() {
     const closeModal = () => {
         setIsCardModalOpen(false);
         setSelectedCard(undefined);
-        dispatch(getAllLinks())
     };
 
     const handleEdit = (card: LinkType) => {
