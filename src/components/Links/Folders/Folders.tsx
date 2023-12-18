@@ -14,19 +14,16 @@ type Props = {
 function Folders({ clickFolderList }: Props) {
     const [isArrow, setIsArrow] = useState(true);
     const [listOfFolders, setListOfFolders] = useState(false);
+    const dispatch = useDispatch();
 
     const folders: FolderType[] = useSelector(
         (state: RootState) => state.folders.folders
     );
-
-
-    const dispatch = useDispatch();
-
+    
     const handleClick = async (event: any) => {
         event.preventDefault();
         event.stopPropagation();
         setListOfFolders(true);
-
         dispatch(addFolder());
     };
 

@@ -8,10 +8,9 @@ import { useState, useEffect } from 'react';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteLink } from "../../../Firebase/Link/deleteLink";
-import { saveLink } from '../../../Firebase/Link/addLink';
+
 import { getAuth } from "firebase/auth";
-import { getAllLinks, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
+import { addLink, deleteLink, getAllLinks, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
 import { setFolder, updateFolder } from "../../../redux/actions/FolderActionCreator";
 import { RootState } from "../../../store";
 import { LinkSortField } from "../../../Enums/LinkSortField";
@@ -43,8 +42,7 @@ function LinksPage() {
 
     const handleAddClick = async (event: any) => {
         event.preventDefault();
-        await saveLink(folder?.id);
-        dispatch(getAllLinks())
+        dispatch(addLink(folder?.id))
     };
 
     const closeModal = () => {
@@ -67,10 +65,8 @@ function LinksPage() {
         if (result && selectedCard) {
             setRemovedCardId(selectedCard.id);
             setTimeout(() => {
-                setRemovedCardId(null);
+                dispatch(deleteLink(selectedCard.id))
             }, 500);
-            await deleteLink(selectedCard.id);
-            dispatch(getAllLinks())
         }
     }
 
