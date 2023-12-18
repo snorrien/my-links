@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import { UpdateLinkModel } from "../../Models/LinkType";
 
 
-export async function updateLink(link: UpdateLinkModel) {
+export async function updateLinkAsync(link: UpdateLinkModel) {
     const linkRef = doc(db, "cards", link.id);
 
     await updateDoc(linkRef, {

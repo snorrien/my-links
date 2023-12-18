@@ -11,11 +11,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteLink } from "../../../Firebase/Link/deleteLink";
 import { saveLink } from '../../../Firebase/Link/addLink';
 import { getAuth } from "firebase/auth";
-import { getAllLinks, getFolders, setFolder, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
+import { getAllLinks, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
+import { setFolder, updateFolder } from "../../../redux/actions/FolderActionCreator";
 import { RootState } from "../../../store";
 import { LinkSortField } from "../../../Enums/LinkSortField";
 import { LinkType } from "../../../Models/LinkType";
-import { updateFolder } from "../../../Firebase/folders/updateFolder";
 import { FolderType } from "../../../Models/FolderType";
 
 function LinksPage() {
@@ -25,7 +25,6 @@ function LinksPage() {
     const [confirmationDialog, setConfirmationDialog] = useState(false);
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
     const [editingFolderTitle, setEditingFolderTitle] = useState(false);
-
 
     const links: LinkType[] = useSelector(
         (state: RootState) => state.links.links
@@ -108,11 +107,10 @@ function LinksPage() {
 
     const handleInputBlur = async () => {
         if (folder) {
-            await updateFolder({
+            dispatch(updateFolder({
                 id: folder.id,
                 title: folder.title,
-            })
-            dispatch(getFolders())
+            }))
         }
     }
 
@@ -121,7 +119,11 @@ function LinksPage() {
             <DndProvider backend={HTML5Backend}>
                 <Folders clickFolderList={clickFolderList} />
                 <div className={`links__wrapper ${isShowFolderList ? 'hide-list-folders' : ' show-list-folders'}`}>
-                    <div className='card__page-title'>
+                    <div className='folder-title'>
+                        <div className='folder-title__delete'>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8ZM6 10V20H18V10H6ZM9 12H11V18H9V12ZM13 12H15V18H13V12ZM7 5V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V5H22V7H2V5H7ZM9 4V5H15V4H9Z" fill="rgba(147, 147, 146,1)"></path></svg>
+                            <p>Delete folder</p>
+                        </div>
                         <input
                             type="text"
                             required
@@ -131,9 +133,7 @@ function LinksPage() {
                             onChange={handleInputChange}
                             onBlur={handleInputBlur}
                         />
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="rgba(173,184,194,1)"></path></svg>
                     </div>
-
                     <div className="nav__search">
                         <button onClick={handleAddClick} className="add-link-button">
                             + Add new link

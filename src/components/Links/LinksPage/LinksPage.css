@@ -26,9 +26,31 @@
   padding: 6rem 1rem 1rem 3rem;
 }
 
-/*==============SEARCH=============*/
+.folder-title__delete {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  width:120px
 
-.card__page-title input {
+}
+.folder-title__delete:hover {
+cursor: pointer;
+  
+}
+
+.folder-title__delete p {
+  font-size: 14px;
+  line-height: 1.2;
+  color: rgba(147, 147, 146);
+}
+
+.folder-title__delete svg {
+  width: 20px;
+  height: 20px;
+}
+
+.folder-title input {
+  padding-top: 1rem;
   font-size: 24px;
   font-weight: 600;
   display: flex;
@@ -38,16 +60,9 @@
 }
 
 
-
-
-.card__page-title input:focus {
+.folder-title input:focus {
   border: none;
   outline: none;
-}
-
-.card__page-title svg {
-  height: 24px;
-  width: 24px;
 }
 
 .nav__search {

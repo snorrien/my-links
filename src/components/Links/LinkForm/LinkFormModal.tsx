@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import "./LinkFormModal.css";
-import { updateLink } from "../../../Firebase/Link/updateLink";
+import { updateLinkAsync } from "../../../Firebase/Link/updateLinkAsync";
 import Modal from "../../Shared/Modal/Modal";
 import { LinkType } from "../../../Models/LinkType";
 
@@ -23,13 +23,12 @@ const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal }) => {
     }
     
     async function handleModalClose() {
-        await updateLink({
+        await updateLinkAsync({
             id: card!.id,
             title: title!,
             description: description!,
             folderId: card.folderId
         });
-
         closeModal();
     }
 

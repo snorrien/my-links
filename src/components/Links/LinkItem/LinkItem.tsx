@@ -2,9 +2,8 @@ import { LinkType } from "../../../Models/LinkType";
 import "./LinkItem.css";
 import { useDrag } from "react-dnd";
 import { FolderType } from "../../../Models/FolderType";
-import { updateLink } from "../../../Firebase/Link/updateLink";
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllLinks, getFolders } from "../../../redux/actions/LinkActionCreator";
+import { useDispatch } from 'react-redux';
+import { updateLink } from "../../../redux/actions/LinkActionCreator";
 
 type Props = {
     link: LinkType;
@@ -29,14 +28,12 @@ function LinkItem({ link, editCard, deleteCard }: Props) {
         end: (link, monitor) => {
             const dropResult = monitor.getDropResult<FolderType>()
             if (link && dropResult) {
-                updateLink({
+                dispatch(updateLink({
                     id: link.id,
                     title: link.title,
                     description: link.description,
                     folderId: dropResult.id
-                })
-                dispatch(getAllLinks());
-                dispatch(getFolders())
+                }));
             }
         },
         collect: (monitor) => ({

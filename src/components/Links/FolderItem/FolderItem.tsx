@@ -2,7 +2,7 @@ import { FolderType } from "../../../Models/FolderType";
 import { useDrop } from "react-dnd";
 import "./FolderItem.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { setFolder } from "../../../redux/actions/LinkActionCreator";
+import { setFolder } from "../../../redux/actions/FolderActionCreator";
 
 type Props = {
     folder: FolderType,

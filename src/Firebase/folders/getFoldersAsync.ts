@@ -4,7 +4,7 @@ import { FolderType } from "../../Models/FolderType";
 import { getAuth } from "firebase/auth";
 import { getLinksCount } from "../Link/getLinksCount";
 
-export async function getFolders() {
+export async function getFoldersAsync() {
     const userId = getAuth().currentUser?.uid;
     if (!userId) {
         return [];

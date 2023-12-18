@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import { UpdateFolderModel } from "../../Models/FolderType";
 
 
-export async function updateFolder(folder: UpdateFolderModel) {
+export async function updateFolderAsync(folder: UpdateFolderModel) {
     const folderRef = doc(db, "folders", folder.id);
 
     await updateDoc(folderRef, {

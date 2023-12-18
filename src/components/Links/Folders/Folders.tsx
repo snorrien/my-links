@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import './Folders.css'
 import { FolderType } from '../../../Models/FolderType';
-import { addFolder } from '../../../Firebase/folders/addFolder';
 import { getAuth } from 'firebase/auth';
 import FolderItem from '../FolderItem/FolderItem';
-import { getAllLinks, getFolders, setFolder } from '../../../redux/actions/LinkActionCreator';
+import { addFolder, getFolders, setFolder } from '../../../redux/actions/FolderActionCreator';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 
@@ -26,9 +25,9 @@ function Folders({ clickFolderList }: Props) {
     const handleClick = async (event: any) => {
         event.preventDefault();
         event.stopPropagation();
-        await addFolder();
-        await dispatch(getFolders());
-        
+        setListOfFolders(true);
+
+        dispatch(addFolder());
     };
 
     useEffect(() => {
@@ -49,8 +48,6 @@ function Folders({ clickFolderList }: Props) {
     const showAllLinks = () => {
         dispatch(setFolder(undefined));
     };
-
-
 
     return (
         <div className={`folders__wrapper ${isArrow ? 'move-left' : ''}`}>
