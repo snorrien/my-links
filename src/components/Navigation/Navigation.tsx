@@ -93,13 +93,6 @@ const Navigation: React.FC = () => {
             </p>
           </div>
         )}
-        {modalState === ModalState.ConfirmRegister && (
-          <div>
-            <div>You are registred</div>
-            <Button text='Back to Login' onClick={() => setModalState(ModalState.Login)} />
-          </div>
-        )}
-
       </Modal>
     </div>
   )

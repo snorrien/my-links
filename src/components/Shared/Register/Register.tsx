@@ -4,6 +4,7 @@ import Input from "../Input/Input";
 import { useState } from "react";
 import { register } from "../../../Firebase/authenticate/register";
 import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     backToLogin: any;
@@ -14,6 +15,7 @@ function Register({ backToLogin }: Props) {
     const [emailError, setEmailError] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
+    const navigate = useNavigate();
 
     function isEmailValid(value: string) {
         if (!/^[\w\.-]+@[\w\.-]+$/.test(value)) {
@@ -32,10 +34,12 @@ function Register({ backToLogin }: Props) {
         setPasswordError(isPasswordValid(password));
     }
 
+
+
     async function handleRegisterClick() {
         validateInputs();
         await register(email, password);
-        backToLogin();
+        navigate("/link");
     };
 
 
