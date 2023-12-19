@@ -4,10 +4,11 @@ import Modal from "../Modal/Modal";
 
 type Props = {
     isOpen: boolean,
-    closeDialog: (result: boolean) => Promise<void>;
+    closeDialog: (result: boolean) => Promise<void>,
+    message: string
 }
 
-const ConfirmationDialog: React.FC<Props> = ({ isOpen, closeDialog }) => {
+const ConfirmationDialog: React.FC<Props> = ({ isOpen, closeDialog, message }) => {
 
     async function handleModalClose() {
         closeDialog(false);
@@ -19,7 +20,7 @@ const ConfirmationDialog: React.FC<Props> = ({ isOpen, closeDialog }) => {
 
     return (
         <Modal title="Are you sure?" isOpen={isOpen} onClose={handleModalClose}>
-            <div className="confirm-dialog__text">Do you want to delete the Card?</div>
+            <div className="confirm-dialog__text">{message}</div>
             <div className="confirm-dialog__buttons">
                 <Button text='Yes' onClick={async () => await handleResult(true)} />
                 <Button text='No' onClick={async () => await handleResult(false)} />

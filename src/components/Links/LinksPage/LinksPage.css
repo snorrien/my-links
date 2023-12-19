@@ -26,20 +26,32 @@
   padding: 6rem 1rem 1rem 3rem;
 }
 
+.folder-title__none-delete{
+  display: none;
+}
+
 .folder-title__delete {
   display: flex;
+  opacity: 0; 
+  transition: opacity 0.1s ease; 
   gap: 5px;
   align-items: center;
-  width:120px
-
+  width: 120px;
+  padding: 4px;
+  border-radius: 3px;
 }
+
 .folder-title__delete:hover {
-cursor: pointer;
-  
+  cursor: pointer;
+  background-color: rgb(238, 238, 236);
+}
+
+.folder-title:hover .folder-title__delete {
+  opacity: 1; 
 }
 
 .folder-title__delete p {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.2;
   color: rgba(147, 147, 146);
 }
@@ -51,7 +63,7 @@ cursor: pointer;
 
 .folder-title input {
   padding-top: 1rem;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   display: flex;
   gap: 1rem;
@@ -152,8 +164,8 @@ cursor: pointer;
   }
 
   100% {
-   
-   display: none;
+
+    display: none;
     transform: scale(0);
   }
 }

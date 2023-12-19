@@ -1,5 +1,5 @@
 import { FolderType, UpdateFolderModel } from "../../Models/FolderType";
-import {  SET_FOLDER, SET_FOLDERS, ADD_FOLDER, GET_FOLDERS, UPDATE_FOLDER } from "../constants";
+import {  SET_FOLDER, SET_FOLDERS, ADD_FOLDER, GET_FOLDERS, UPDATE_FOLDER, DELETE_FOLDER } from "../constants";
 
 export const setFolder = (folder?: FolderType) => ({
     type: SET_FOLDER,
@@ -22,4 +22,9 @@ export const getFolders = () => ({
 export const updateFolder = (folder: UpdateFolderModel) => ({
     type: UPDATE_FOLDER,
     folder: folder
+});
+
+export const deleteFolder = (id: string) => ({
+    type: DELETE_FOLDER,
+    id: id
 });
