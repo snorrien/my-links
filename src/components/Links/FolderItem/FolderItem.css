@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-.folder-item__number {
+.folder-item__count {
     position: absolute;
     right: 10px;
     top: 30%;

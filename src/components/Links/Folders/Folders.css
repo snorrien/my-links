@@ -1,4 +1,4 @@
-.folders__wrapper {
+.folders {
     height: 100vh;
     background-color: white;
     width: 15rem;
@@ -31,20 +31,10 @@
     cursor: pointer;
 }
 
-.folders__items-highlight{
-background-color: rgb(244, 241, 246);
-}
-
-
-.folders__list-button {
+.folders__button {
     display: flex;
     justify-content: space-between;
     text-align: center;
-}
-
-.add-folder-button-svg {
-    width: 20px;
-    height: 20px;
 }
 
 .add-folder-button {
@@ -63,6 +53,11 @@ background-color: rgb(244, 241, 246);
 .add-folder-button:hover {
     cursor: pointer;
     background-color: rgba(173, 184, 194, 1);
+}
+
+.add-folder-button-svg {
+    width: 20px;
+    height: 20px;
 }
 
 .folders__items-hidden {

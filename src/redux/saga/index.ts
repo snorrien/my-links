@@ -1,7 +1,7 @@
 import { call, put, takeEvery} from "redux-saga/effects";
 import { ADD_FOLDER, ADD_LINK, DELETE_FOLDER, DELETE_LINK, GET_ALL_LINKS, GET_FOLDERS, MOVE_LINK, SET_FOLDER,  SET_SEARCH, SET_SORTING, UPDATE_FOLDER, UPDATE_LINK } from "../constants";
 import { getAllLinks, setAllLinks, updateLink, updateLinks } from "../actions/LinkActionCreator";
-import { getFolders, setFolders} from "../actions/FolderActionCreator";
+import { getFolders, setFolder, setFolders} from "../actions/FolderActionCreator";
 import { getLinks } from "../../Firebase/Link/getLinks";
 import { LinkType } from "../../Models/LinkType";
 import { FolderType } from "../../Models/FolderType";
@@ -60,6 +60,7 @@ export function* updateFolderSaga(action: any) {
 
 export function* deleteFolderSaga(action: any) {
     yield call(deleteFolderAsync, action.id);
+    yield put(setFolder(undefined));
     yield put(getFolders());
 }
 

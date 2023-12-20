@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import "./Navigation.css";
 import Modal from "../Shared/Modal/Modal";
-import Register from "../Shared/Register/Register";
-import Button from "../Shared/Button/Button";
+import Register from "../UserAuthentication/Register/Register";
 import { ModalState } from "./ModalState";
-import Login from "../Shared/Login/LogIn";
+import Login from "../UserAuthentication/Login/LogIn";
 import { userSignOut } from "../../Firebase/authenticate/signOut";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
@@ -20,7 +19,7 @@ const Navigation: React.FC = () => {
     getAuth().onAuthStateChanged(() => {
       if (getAuth().currentUser) {
         setIsOpen(false)
-        setIsSignOut(true)
+        setIsSignOut(true) // global
       }
     })
 
@@ -42,8 +41,6 @@ const Navigation: React.FC = () => {
         return 'Login';
       case ModalState.Register:
         return 'Register';
-      case ModalState.ConfirmRegister:
-        return 'Regestration Completed!';
     }
   }
 
@@ -86,7 +83,7 @@ const Navigation: React.FC = () => {
         )}
         {modalState === ModalState.Register && (
           <div>
-            <Register backToLogin={() => setModalState(ModalState.ConfirmRegister)} />
+            <Register />
             <p className="login__toggle">
               Already have an account?
               <a className="toggle_link" href="#" onClick={() => setModalState(ModalState.Login)}>LogIn</a>

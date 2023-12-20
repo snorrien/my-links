@@ -5,8 +5,6 @@
   background: var(--common-color);
 }
 
-
-
 .links__wrapper {
   display: flex;
   flex-direction: column;
@@ -70,7 +68,6 @@
   border: none;
   background-color: white;
 }
-
 
 .folder-title input:focus {
   border: none;
@@ -150,9 +147,6 @@
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
-
-
-
 
 .deleteAnimation {
   animation: compressionAnimation 0.8s ease-in-out;

@@ -1,9 +1,8 @@
 import "./Login.css";
-import Button from "../Button/Button";
-import Input from "../Input/Input";
-import { useEffect, useState } from "react";
+import Button from "../../Shared/Button/Button";
+import Input from "../../Shared/Input/Input";
+import { useState } from "react";
 import { authenticate } from "../../../Firebase/authenticate/authenticate";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
@@ -24,9 +23,10 @@ const Login = () => {
             setEmailError(emailError);
             setPasswordError(passwordError);
         } else {
+            // use saga
             await authenticate(email, password);
             if (auth.currentUser) {
-                setUserIsUndefind(false)
+                setUserIsUndefind(false);
                 navigate("/link");
             } else {
                 setUserIsUndefind(true)

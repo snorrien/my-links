@@ -1,16 +1,11 @@
 import "./Register.css";
-import Button from "../Button/Button";
-import Input from "../Input/Input";
+import Button from "../../Shared/Button/Button";
+import Input from "../../Shared/Input/Input";
 import { useState } from "react";
 import { register } from "../../../Firebase/authenticate/register";
-import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-type Props = {
-    backToLogin: any;
-};
-
-function Register({ backToLogin }: Props) {
+function Register() {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState('');
@@ -34,14 +29,11 @@ function Register({ backToLogin }: Props) {
         setPasswordError(isPasswordValid(password));
     }
 
-
-
     async function handleRegisterClick() {
         validateInputs();
         await register(email, password);
         navigate("/link");
     };
-
 
     return (
         <div>
@@ -51,17 +43,18 @@ function Register({ backToLogin }: Props) {
                     placeholder="Email"
                     onChange={setEmail}
                     error={emailError}
-                ></Input>
+                />
                 <Input
                     label='Password'
                     placeholder="Password"
                     onChange={setPassword}
                     error={passwordError}
-                ></Input>
+                />
                 <Input
                     label='Confirm Password'
                     placeholder="Confirm Password"
-                    onChange={setPassword}></Input>
+                    onChange={setPassword}
+                />
             </div>
             <div className="register_btn">
                 <Button text='Register' onClick={handleRegisterClick} />

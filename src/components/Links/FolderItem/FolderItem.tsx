@@ -1,7 +1,7 @@
 import { FolderType } from "../../../Models/FolderType";
 import { useDrop } from "react-dnd";
 import "./FolderItem.css";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFolder } from "../../../redux/actions/FolderActionCreator";
 
 type Props = {
@@ -28,7 +28,7 @@ function FolderItem({ folder }: Props) {
 
     return (
         <div ref={drop} key={folder.id} className="folder-item" onClick={handleClickFolder}>{folder.title === '' ? 'Untitled' : folder.title}
-            <span className="folder-item__number">{folder.linksCount}</span>
+            <span className="folder-item__count">{folder.linksCount}</span>
         </div>
     );
 }

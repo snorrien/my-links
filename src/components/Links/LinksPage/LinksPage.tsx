@@ -19,7 +19,6 @@ import { FolderType } from "../../../Models/FolderType";
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
     const [selectedCard, setSelectedCard] = useState<LinkType>();
-    const [selectedFolder, setSelectedFolder] = useState<FolderType>();
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [isRemoveFolderDialogOpen, setIsRemoveFolderDialogOpen] = useState(false);
     const [isRemoveLinkDialogOpen, setIsRemoveLinkDialogOpen] = useState(false);
@@ -35,38 +34,33 @@ function LinksPage() {
     );
 
     useEffect(() => {
+        // TODO: refactor (no dependency on firebase)
         getAuth().onAuthStateChanged(() => {
             dispatch(getAllLinks());
         });
     }, []);
 
-    const handleAddClick = async (event: any) => {
+    async function handleAddClick(event: any) {
         event.preventDefault();
         dispatch(addLink(folder?.id))
     };
 
-    const closeModal = () => {
+    function closeModal() {
         setIsCardModalOpen(false);
         setSelectedCard(undefined);
     };
 
-    const handleEdit = (card: LinkType) => {
+    function handleEdit(card: LinkType) {
         setSelectedCard(card);
         setIsCardModalOpen(true);
     }
 
-    const handleDeleteCard = async (card: LinkType) => {
+    async function handleDeleteCard(card: LinkType) {
         setSelectedCard(card);
         setIsRemoveLinkDialogOpen(true);
     }
 
-    const handleDeleteFolder = () => {
-        if (folder) {
-            setIsRemoveFolderDialogOpen(true);
-        }
-    }
-
-    const closeRemoveLinkDialog = async (result: boolean) => {
+    async function closeRemoveLinkDialog(result: boolean) {
         setIsRemoveLinkDialogOpen(false)
         if (result && selectedCard) {
             setRemovedCardId(selectedCard.id);
@@ -76,17 +70,21 @@ function LinksPage() {
         }
     }
 
-    const closeRemoveFolderDialog = async (result: boolean) => {
-        setIsRemoveFolderDialogOpen(false)
-        dispatch(deleteFolder(folder.id))
+    function handleDeleteFolder() {
+        setIsRemoveFolderDialogOpen(true);
     }
 
-    const filterBySearch = async (event: any) => {
+    async function closeRemoveFolderDialog(result: boolean) {
+        setIsRemoveFolderDialogOpen(false);
+        dispatch(deleteFolder(folder.id));
+    }
+
+    async function filterBySearch(event: any) {
         const value = event.target.value;
         dispatch(setSearch(value))
     };
 
-    const onSortingChange = async (sorting: string) => {
+    async function onSortingChange(sorting: string)  {
         if (sorting === 'by Title') {
             dispatch(setSorting(LinkSortField.title));
         } else {
@@ -102,8 +100,7 @@ function LinksPage() {
         return removedCardId === cardId ? 'deleteAnimation' : '';
     }
 
-
-    const handleInputChange = (event: any) => {
+    function handleInputChange(event: any) {
         dispatch(setFolder({
             id: folder.id,
             title: event.target.value,
@@ -111,7 +108,7 @@ function LinksPage() {
         }));
     };
 
-    const handleInputBlur = async () => {
+    async function handleInputBlur() {
         if (folder) {
             dispatch(updateFolder({
                 id: folder.id,
@@ -151,7 +148,6 @@ function LinksPage() {
                             <input className="search__input" placeholder="Search..." type="text" name="text" onChange={filterBySearch} />
                         </div>
                     </div>
-
                     <div className={links.length >= 5 ? "big-cards-grid" : "small-cards-grid"} >
                         {links.map((link, index) => (
                             <div key={link.id}
