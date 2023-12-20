@@ -9,24 +9,29 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from "firebase/auth";
-import { addLink, deleteLink, getAllLinks, setSearch, setSorting } from "../../../redux/actions/LinkActionCreator";
+import { addLink, deleteLink, getAllLinks, setLinkToRemove, setSearch, setSelectedLink, setSorting } from "../../../redux/actions/LinkActionCreator";
 import { deleteFolder, setFolder, updateFolder } from "../../../redux/actions/FolderActionCreator";
-import { RootState } from "../../../store";
 import { LinkSortField } from "../../../Enums/LinkSortField";
 import { LinkType } from "../../../Models/LinkType";
 import { FolderType } from "../../../Models/FolderType";
+import { RootState } from "../../../redux/store/store";
 
 function LinksPage() {
     const [isShowFolderList, setIsShowFolderList] = useState(true);
-    const [selectedCard, setSelectedCard] = useState<LinkType>();
-    const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [isRemoveFolderDialogOpen, setIsRemoveFolderDialogOpen] = useState(false);
-    const [isRemoveLinkDialogOpen, setIsRemoveLinkDialogOpen] = useState(false);
     const [removedCardId, setRemovedCardId] = useState<string | null>(null);
     const dispatch = useDispatch();
 
     const links: LinkType[] = useSelector(
         (state: RootState) => state.links.links
+    );
+
+    const selectedLink: LinkType | undefined = useSelector(
+        (state: RootState) => state.links.selectedLink
+    );
+
+    const linkToRemove: LinkType | undefined = useSelector(
+        (state: RootState) => state.links.linkToRemove
     );
 
     const folder: FolderType = useSelector(
@@ -45,27 +50,20 @@ function LinksPage() {
         dispatch(addLink(folder?.id))
     };
 
-    function closeModal() {
-        setIsCardModalOpen(false);
-        setSelectedCard(undefined);
-    };
-
-    function handleEdit(card: LinkType) {
-        setSelectedCard(card);
-        setIsCardModalOpen(true);
+    function handleEdit(link: LinkType) {
+        dispatch(setSelectedLink(link));
     }
 
-    async function handleDeleteCard(card: LinkType) {
-        setSelectedCard(card);
-        setIsRemoveLinkDialogOpen(true);
+    async function handleDeleteCard(link: LinkType) {
+        dispatch(setLinkToRemove(link));
     }
 
     async function closeRemoveLinkDialog(result: boolean) {
-        setIsRemoveLinkDialogOpen(false)
-        if (result && selectedCard) {
-            setRemovedCardId(selectedCard.id);
+        dispatch(setLinkToRemove(undefined));
+        if (result && linkToRemove) {
+            setRemovedCardId(linkToRemove.id);
             setTimeout(() => {
-                dispatch(deleteLink(selectedCard.id))
+                dispatch(deleteLink(linkToRemove.id));
             }, 500);
         }
     }
@@ -84,7 +82,7 @@ function LinksPage() {
         dispatch(setSearch(value))
     };
 
-    async function onSortingChange(sorting: string)  {
+    async function onSortingChange(sorting: string) {
         if (sorting === 'by Title') {
             dispatch(setSorting(LinkSortField.title));
         } else {
@@ -157,15 +155,14 @@ function LinksPage() {
                             </div>
                         ))}
                     </div>
-                    {selectedCard &&
+                    {selectedLink &&
                         <LinkFormModal
-                            card={selectedCard}
-                            isOpen={isCardModalOpen}
-                            closeModal={closeModal}
+                            link={selectedLink}
+                            isOpen={selectedLink !== undefined}
                         />
                     }
                     <ConfirmationDialog
-                        isOpen={isRemoveLinkDialogOpen}
+                        isOpen={linkToRemove !== undefined}
                         closeDialog={closeRemoveLinkDialog}
                         message='Do you want to delete the Card?'
                     />

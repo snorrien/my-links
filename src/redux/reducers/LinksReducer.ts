@@ -1,13 +1,15 @@
 import { LinkSortField } from "../../Enums/LinkSortField";
 import { FolderType } from "../../Models/FolderType";
 import { LinkType } from "../../Models/LinkType";
-import { SET_ALL_LINKS, GET_LINKS_REQUEST, GET_LINKS_LOADED,  SET_SEARCH, SET_SORTING, UPDATE_LINKS, SET_FOLDER } from "../constants";
-import {produce} from "immer"
+import { SET_ALL_LINKS, GET_LINKS_REQUEST, GET_LINKS_LOADED, SET_SEARCH, SET_SORTING, UPDATE_LINKS, SET_FOLDER, SET_SELECTED_LINK, SET_LINK_TO_REMOVE } from "../constants";
+import { produce } from "immer"
 
 
 interface LinksState {
     allLinks: LinkType[],
     links: LinkType[],
+    selectedLink?: LinkType,
+    linkToRemove?: LinkType,
     loading: boolean,
     folder?: FolderType,
     search: string,
@@ -78,6 +80,15 @@ const linksReducer = (state: LinksState = initialState, action: any) => {
                 ...state,
                 loading: false
             }
+        case SET_SELECTED_LINK:
+            return produce(state, draftState => {
+                draftState.selectedLink = action.selectedLink
+            })
+
+        case SET_LINK_TO_REMOVE:
+            return produce(state, draftState => {
+                draftState.linkToRemove = action.linkToRemove
+            })
         default:
             return state;
     }

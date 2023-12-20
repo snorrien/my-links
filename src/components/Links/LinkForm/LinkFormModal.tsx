@@ -7,15 +7,14 @@ import { updateLink } from "../../../redux/actions/LinkActionCreator";
 import Input from "../../Shared/Input/Input";
 
 type Props = {
-    card: LinkType;
+    link: LinkType;
     isOpen: boolean,
-    closeModal: any;
 }
 
 // isOpen and closeModal will be removed
-const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal }) => {
-    const [title, setTitle] = useState(card.title);
-    const [description, setDescription] = useState(card.description);
+const LinkFormModal: React.FC<Props> = ({ link, isOpen }) => {
+    const [title, setTitle] = useState(link.title);
+    const [description, setDescription] = useState(link.description);
     const dispatch = useDispatch();
 
     function handleTitleChange(value: string): void {
@@ -28,12 +27,11 @@ const LinkFormModal: React.FC<Props> = ({ card, isOpen, closeModal }) => {
 
     async function handleModalClose() {
         dispatch(updateLink({
-            id: card!.id,
+            id: link!.id,
             title: title!,
             description: description!,
-            folderId: card.folderId
+            folderId: link.folderId
         }));
-        closeModal(); // move this logic to updateLink action
     }
 
     // isOpen -> isLinkOpen (in RootState)

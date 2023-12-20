@@ -1,6 +1,8 @@
 export const GET_ALL_LINKS = "GET_ALL_LINKS";
 export const SET_ALL_LINKS = "SET_ALL_LINKS";
 export const SET_LINKS = "SET_LINKS";
+export const SET_SELECTED_LINK = "SET_SELECTED_LINK";
+export const SET_LINK_TO_REMOVE = "SET_LINK_TO_REMOVE";
 export const UPDATE_LINK = "UPDATE_LINK";
 export const UPDATE_LINKS = "UPDATE_LINKS";
 export const MOVE_LINK = "MOVE_LINK";

@@ -5,7 +5,7 @@ import { getAuth } from 'firebase/auth';
 import FolderItem from '../FolderItem/FolderItem';
 import { addFolder, getFolders, setFolder } from '../../../redux/actions/FolderActionCreator';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { RootState } from '../../../redux/store/store';
 
 type Props = {
     clickFolderList: any;
